@@ -1,12 +1,14 @@
 import React from 'react';
-import { Counter } from './features/counter/Counter';
+import { Routes, Route } from 'react-router';
 import './App.css';
+import { Home } from './components/Home';
 
 function App() {
   return (
-    <div>
-      <h1> social media app </h1>
-        
+    <div className="bg-coolGray-200 min-h-screen">
+      <Routes>
+        <Route path="/" element={<Home />} />
+      </Routes>
     </div>
   );
 }
