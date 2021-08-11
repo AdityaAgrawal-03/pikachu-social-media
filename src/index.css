@@ -2,3 +2,9 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+@layer components {
+  .post-card {
+    @apply bg-coolGray-50 rounded-xl w-11/12 flex mb-4 p-4;
+  }
+}

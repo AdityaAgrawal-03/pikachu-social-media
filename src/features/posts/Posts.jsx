@@ -1,17 +1,27 @@
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
+import { Link } from "react-router-dom";
 import Avatar from "react-avatar";
+import "../../index.css";
+import { useEffect } from "react";
+import { fetchPosts } from "./postsSlice";
 
 export function Posts() {
-  const posts = useSelector((state) => state.posts);
+  const dispatch = useDispatch();
+  const posts = useSelector((state) => state.posts.posts);
   console.log({ posts });
+
+  const postStatus = useSelector((state) => state.posts.status);
+
+  useEffect(() => {
+    if (postStatus === "idle") {
+      dispatch(fetchPosts());
+    }
+  }, [dispatch, postStatus]);
 
   return (
     <div className="flex flex-col items-center mt-8">
-      {posts.map((post) => (
-        <div
-          key={post.id}
-          className="bg-coolGray-50 rounded-xl w-1/2 mx-auto flex mb-4 p-4"
-        >
+      {posts.map(({ _id, content, user: { name, username } }) => (
+        <Link to={`/post/${_id}`} className="post-card" key={_id}>
           <Avatar
             name="Aditya Agrawal"
             round={true}
@@ -25,11 +35,23 @@ export function Posts() {
           />
           <div className="flex flex-col ml-4">
             <p className="font-semibold">
-              Aditya <small className="font-light"> @aditya </small>
+              {name} <small className="font-light"> @{username} </small>
             </p>
-            <p className="mt-2"> {post.post} </p>
+            <p className="my-2">{content}</p>
+            <div>
+              <button>
+                <span className="material-icons-round blue-500 mr-2">
+                  favorite_border
+                </span>
+              </button>
+              <button>
+                <span className="material-icons-round blue-500">
+                  chat_bubble
+                </span>
+              </button>
+            </div>
           </div>
-        </div>
+        </Link>
       ))}
     </div>
   );

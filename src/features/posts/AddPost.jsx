@@ -8,6 +8,8 @@ export function AddPost() {
   const [newPost, setNewPost] = useState("");
   const dispatch = useDispatch();
 
+  console.log({ newPost })
+
   const onAddPost = () => {
     if (newPost) {
       dispatch(
@@ -22,7 +24,7 @@ export function AddPost() {
   };
 
   return (
-    <section className="flex border-2 w-1/2 rounded-xl p-4  bg-coolGray-50 mx-auto">
+    <section className="flex border-2 w-11/12 rounded-xl p-4  bg-coolGray-50 mx-auto mt-8">
       <Avatar name="Aditya Agrawal" round={true} />
       <form className="w-full h-4/5 ml-4">
         <label htmlFor="newPost">
