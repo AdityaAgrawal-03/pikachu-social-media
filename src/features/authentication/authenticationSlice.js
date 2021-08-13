@@ -84,6 +84,8 @@ const authSlice = createSlice({
   },
 });
 
-
-
 export default authSlice.reducer;
+
+export const selectToken = state => state.auth.token;
+export const selectCurrentUser = state => state.auth.currentUser;
+export const selectAuthStatus = state => state.auth.status;

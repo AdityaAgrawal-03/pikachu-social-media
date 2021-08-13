@@ -3,7 +3,6 @@ import { useSelector } from "react-redux";
 
 export function PrivateRoute({ path, ...props }) {
   const token = useSelector((state) => state.auth.token);
-  console.log("from private route", { token })
 
   return (
     <>

@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { useNavigate, Link } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-import { loginUser } from "./authenticationSlice";
+import { loginUser, selectAuthStatus } from "./authenticationSlice";
 import "../../index.css";
 
 export function Login() {
@@ -10,7 +10,7 @@ export function Login() {
   const navigate = useNavigate();
   const dispatch = useDispatch();
 
-  const status = useSelector((state) => state.auth.status);
+  const status = useSelector(selectAuthStatus);
 
   useEffect(() => {
     if (status === "signed in") {

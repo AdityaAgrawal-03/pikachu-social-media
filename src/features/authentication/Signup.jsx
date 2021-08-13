@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
-import { signupUser } from "./authenticationSlice";
+import { signupUser, selectAuthStatus } from "./authenticationSlice";
 
 export function Signup() {
   const [name, setName] = useState("");
@@ -9,7 +9,7 @@ export function Signup() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
-  const status = useSelector((state) => state.auth.status);
+  const status = useSelector(selectAuthStatus);
   const dispatch = useDispatch();
 
   const navigate = useNavigate();

@@ -3,21 +3,19 @@ import { Link, useNavigate } from "react-router-dom";
 import Avatar from "react-avatar";
 import "../../index.css";
 import { useEffect } from "react";
-import { fetchPosts } from "./postsSlice";
+import { fetchPosts, selectAllPosts, selectPostStatus } from "./postsSlice";
+import { selectToken, selectCurrentUser } from "../authentication/authenticationSlice";
 import { setUpAuthHeaderForServiceCalls } from "../../utils/index";
 import { PostReaction } from "../index";
 
 export function Posts() {
   const dispatch = useDispatch();
-  const posts = useSelector((state) => state.posts.posts);
-  console.log({ posts });
-
-  const postStatus = useSelector((state) => state.posts.status);
-  const token = useSelector((state) => state.auth.token);
-  const user = useSelector((state) => state.auth.currentUser);
+  const posts = useSelector(selectAllPosts);
+  const postStatus = useSelector(selectPostStatus);
+  const token = useSelector(selectToken);
+  const user = useSelector(selectCurrentUser);
   const navigate = useNavigate();
 
-  console.log({ user });
 
   useEffect(() => {
     if (token) {
@@ -29,7 +27,6 @@ export function Posts() {
 
   useEffect(() => {
     if (postStatus === "idle") {
-      console.log({ postStatus });
       dispatch(fetchPosts());
     }
   }, [dispatch, postStatus]);
