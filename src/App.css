@@ -7,3 +7,6 @@ body {
 .material-icons-round.blue-500 {
   color: #3B82F6;
 }
+.material-icons-round.bg-red-500 {
+  background-color: #EF4444;
+}

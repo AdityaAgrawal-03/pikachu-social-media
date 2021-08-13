@@ -1,10 +1,36 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import { useSelector, useDispatch } from "react-redux";
+import { useNavigate } from "react-router-dom";
+import { signupUser } from "./authenticationSlice";
 
 export function Signup() {
   const [name, setName] = useState("");
   const [username, setUsername] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+
+  const status = useSelector((state) => state.auth.status);
+  const dispatch = useDispatch();
+
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    if (status === "signed up") {
+      navigate("/", { replace: true });
+    }
+  });
+
+  const signup = () => {
+    status === "idle" &&
+      dispatch(
+        signupUser({
+          name: name,
+          username: username,
+          email: email,
+          password: password,
+        })
+      );
+  };
 
   return (
     <div>
@@ -50,7 +76,10 @@ export function Signup() {
             onChange={(e) => setPassword(() => e.target.value)}
           />
         </label>
-        <button type="button"> Singup </button>
+        <button type="button" onClick={signup}>
+          {" "}
+          Signup{" "}
+        </button>
       </form>
     </div>
   );

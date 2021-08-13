@@ -6,12 +6,12 @@ export function SinglePost() {
   const { postId } = useParams();
   
   const post = useSelector((state) =>
-    state.posts.posts.find((post) => post?.id === postId)
+    state.posts.posts.find((post) => post?._id === postId)
   );
   
   return (
     <section className="post-card">
-      <p> {post.post} </p>
+      <p> {post.content} </p>
     </section>
   );
 }
