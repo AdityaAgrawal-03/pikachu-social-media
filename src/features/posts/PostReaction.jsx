@@ -8,7 +8,7 @@ export function PostReaction({ postId, userId }) {
   );
   const dispatch = useDispatch();
 
-  const isInLiked = post.likes.includes(userId);
+  const isInLiked = post?.likes.includes(userId);
 
   const likeButtonPressedAction = (e) => {
     e.preventDefault();

@@ -1,35 +1,16 @@
-import { useSelector, useDispatch } from "react-redux";
-import { Link, useNavigate } from "react-router-dom";
+import { useSelector } from "react-redux";
+import { Link } from "react-router-dom";
 import Avatar from "react-avatar";
 import "../../index.css";
-import { useEffect } from "react";
-import { fetchPosts, selectAllPosts, selectPostStatus } from "./postsSlice";
-import { selectToken, selectCurrentUser } from "../authentication/authenticationSlice";
-import { setUpAuthHeaderForServiceCalls } from "../../utils/index";
+import { selectAllPosts } from "./postsSlice";
+import { selectCurrentUser } from "../authentication/authenticationSlice";
 import { PostReaction } from "../index";
 
 export function Posts() {
-  const dispatch = useDispatch();
   const posts = useSelector(selectAllPosts);
-  const postStatus = useSelector(selectPostStatus);
-  const token = useSelector(selectToken);
   const user = useSelector(selectCurrentUser);
-  const navigate = useNavigate();
 
-
-  useEffect(() => {
-    if (token) {
-      setUpAuthHeaderForServiceCalls(token);
-    } else {
-      navigate("/login", { replace: true });
-    }
-  }, [token, navigate]);
-
-  useEffect(() => {
-    if (postStatus === "idle") {
-      dispatch(fetchPosts());
-    }
-  }, [dispatch, postStatus]);
+  console.log({ user, posts })
 
   return (
     <div className="flex flex-col items-center mt-8">
@@ -37,7 +18,7 @@ export function Posts() {
         posts.map((post) => (
           <Link to={`/post/${post._id}`} className="post-card" key={post._id}>
             <Avatar
-              name="Aditya Agrawal"
+              name={user?.name}
               round={true}
               color={Avatar.getRandomColor("sitebase", [
                 "#F9FAFB",

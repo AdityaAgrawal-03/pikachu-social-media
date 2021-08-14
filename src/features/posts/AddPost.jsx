@@ -1,31 +1,22 @@
 import { useState } from "react";
-import { useDispatch } from "react-redux";
-import { postAdded } from "./postsSlice";
-import { nanoid } from "@reduxjs/toolkit";
+import { useDispatch, useSelector } from "react-redux";
 import Avatar from "react-avatar";
+import { addPost } from "./postsSlice";
+import { selectCurrentUser } from "../index"
 
 export function AddPost() {
   const [newPost, setNewPost] = useState("");
   const dispatch = useDispatch();
+  const user = useSelector(selectCurrentUser);
 
-  console.log({ newPost })
-
-  const onAddPost = () => {
-    if (newPost) {
-      dispatch(
-        postAdded({
-          id: nanoid(),
-          post: newPost,
-        })
-      );
-
-      setNewPost("");
-    }
+  const addPostAction = () => {
+    dispatch(addPost({ content: newPost }));
+    setNewPost("");
   };
 
   return (
     <section className="flex border-2 w-11/12 rounded-xl p-4  bg-coolGray-50 mx-auto mt-8">
-      <Avatar name="Aditya Agrawal" round={true} />
+      <Avatar name={user?.name} round={true} />
       <form className="w-full h-4/5 ml-4">
         <label htmlFor="newPost">
           <textarea
@@ -42,10 +33,9 @@ export function AddPost() {
         <button
           type="button"
           className="text-white py-2 px-6 bg-blue-500 rounded-lg"
-          onClick={onAddPost}
+          onClick={addPostAction}
         >
-          {" "}
-          Add Post{" "}
+          Add Post
         </button>
       </form>
     </section>
