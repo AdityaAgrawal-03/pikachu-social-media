@@ -3,7 +3,7 @@ import Avatar from "react-avatar";
 import { useParams } from "react-router";
 import { useSelector } from "react-redux";
 import { selectPostById, selectCurrentUser } from "../index";
-import { PostReaction, AddComment } from "../index";
+import { PostReaction, AddComment, CommentCard } from "../index";
 
 export function Post() {
   const { postId } = useParams();
@@ -44,9 +44,7 @@ export function Post() {
           </section>
           <AddComment postId={postId} />
           {post?.comment.map((comment) => (
-            <div key={comment?._id}>
-              <p> {comment?.comment} </p>
-            </div>
+            <CommentCard key={comment._id} comment={comment} />
           ))}
         </div>
       ) : (

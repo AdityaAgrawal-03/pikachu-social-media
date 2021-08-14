@@ -37,8 +37,7 @@ export function AddComment({ postId }) {
           }
           onClick={addCommentAction}
         >
-          {" "}
-          Reply{" "}
+          Reply
         </button>
       </form>
     </div>

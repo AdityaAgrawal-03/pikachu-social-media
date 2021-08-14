@@ -5,12 +5,13 @@ import { useSelector, useDispatch } from "react-redux";
 import "./App.css";
 import { Home, PrivateRoute } from "./components";
 import { Post, Login, Signup } from "./features/index";
-import { selectToken, fetchPosts, selectPostStatus } from "./features/index";
+import { selectToken, fetchPosts, selectPostStatus, fetchAllUsers, selectUserStatus } from "./features/index";
 import { setUpAuthHeaderForServiceCalls } from "./utils/index";
 
 function App() {
   const token = useSelector(selectToken);
-  const status = useSelector(selectPostStatus);
+  const postStatus = useSelector(selectPostStatus);
+  const userStatus = useSelector(selectUserStatus);
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
@@ -23,10 +24,16 @@ function App() {
   }, [token, navigate]);
 
   useEffect(() => {
-    if (token && status === "idle") {
+    if (token && postStatus === "idle") {
       dispatch(fetchPosts());
     }
-  }, [dispatch, token, status]);
+  }, [dispatch, token, postStatus]);
+
+  useEffect(() => {
+    if (token && userStatus === "idle") {
+      dispatch(fetchAllUsers());
+    }
+  }, [dispatch, token, userStatus])
 
   return (
     <div className="bg-coolGray-200 min-h-screen">
