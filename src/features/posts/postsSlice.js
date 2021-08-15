@@ -154,3 +154,4 @@ export const selectAllPosts = (state) => state.posts.posts;
 export const selectPostStatus = (state) => state.posts.status;
 export const selectPostById = (state, postId) =>
   state.posts.posts.find((post) => post?._id === postId);
+export const selectPostByUserId = (state, userId) => state.posts.posts.filter((post) => post.user._id === userId)

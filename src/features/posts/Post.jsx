@@ -1,6 +1,6 @@
 import "../../index.css";
 import Avatar from "react-avatar";
-import { useParams } from "react-router";
+import { useParams, useNavigate } from "react-router-dom";
 import { useSelector } from "react-redux";
 import { selectPostById, selectCurrentUser } from "../index";
 import { PostReaction, AddComment, CommentCard } from "../index";
@@ -9,6 +9,7 @@ export function Post() {
   const { postId } = useParams();
   const user = useSelector(selectCurrentUser);
   const post = useSelector((state) => selectPostById(state, postId));
+  const navigate = useNavigate();
 
   return (
     <div className="min-h-screen">
@@ -27,10 +28,16 @@ export function Post() {
               ])}
             />
             <div className="flex flex-col ml-4">
-              <p className="font-semibold">
-                {post?.user?.name}{" "}
-                <small className="font-light"> @{post?.user?.username} </small>
-              </p>
+              <button
+                className="font-semibold text-left"
+                onClick={(e) => {
+                  e.preventDefault();
+                  navigate(`/${post?.user?.username}`);
+                }}
+              >
+                {post.user.name}{" "}
+                <small className="font-light"> @{post.user.username} </small>
+              </button>
               <p className="my-2">{post?.content}</p>
               <div>
                 <PostReaction postId={post?._id} userId={user?._id} />
