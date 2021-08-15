@@ -1,41 +1,111 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import axios from "axios";
+import { API_URL } from "../../utils";
 
 // fetchAllUsers
-export const fetchAllUsers = createAsyncThunk("users/fetchAllUsers", async () => {
-  try {
-    const response = await axios.get("https://pikachu-social-media.aditya365.repl.co/users");
-    console.log({ response })
-    return response.data.users;
-  } catch (error) {
-    console.error(error);
+export const fetchAllUsers = createAsyncThunk(
+  "users/fetchAllUsers",
+  async () => {
+    try {
+      const response = await axios.get(
+        "https://pikachu-social-media.aditya365.repl.co/users"
+      );
+      console.log({ response });
+      return response.data.users;
+    } catch (error) {
+      console.error(error);
+    }
   }
-})
+);
+
+// getFollowing
+export const fetchFollowing = createAsyncThunk(
+  "users/fetchFollowing",
+  async ({ username }) => {
+    try {
+      const {
+        data: { userId, userFollowing },
+      } = await axios.get(`${API_URL}/users/${username}/following`);
+
+      return { userId, userFollowing };
+    } catch (error) {
+      console.error(error);
+    }
+  }
+);
+
+// getFollowers
+export const fetchFollowers = createAsyncThunk(
+  "users/fetchFollowers",
+  async ({ username }) => {
+    try {
+      const {
+        data: { userId, userFollowers },
+      } = await axios.get(`${API_URL}/users/${username}/followers`);
+
+      return { userId, userFollowers };
+    } catch (error) {
+      console.error(error);
+    }
+  }
+);
 
 const usersSlice = createSlice({
   name: "users",
   initialState: {
     users: [],
     status: "idle",
-    error: null
+    error: null,
   },
   reducers: {},
   extraReducers: {
     [fetchAllUsers.pending]: (state, action) => {
-      state.status = "pending"
+      state.status = "pending";
     },
     [fetchAllUsers.fulfilled]: (state, action) => {
       state.status = "success";
-      state.users = state.users.concat(action.payload)
+      state.users = state.users.concat(action.payload);
     },
     [fetchAllUsers.rejected]: (state, action) => {
       state.status = "failed";
-      state.error = action.error.message
+      state.error = action.error.message;
     },
-  }
-})
+    [fetchFollowing.pending]: (state, action) => {
+      state.status = "pending";
+    },
+    [fetchFollowing.fulfilled]: (state, action) => {
+      state.status = "success";
+      const user = state.users.find(
+        (user) => user._id === action.payload.userId
+      );
+
+      user.following = action.payload.userFollowing;
+    },
+    [fetchFollowing.rejected]: (state, action) => {
+      state.status = "rejected";
+      state.error = action.error.message;
+    },
+    [fetchFollowers.pending]: (state, action) => {
+      state.status = "pending";
+    },
+    [fetchFollowers.fulfilled]: (state, action) => {
+      state.status = "success";
+      const user = state.users.find(
+        (user) => user._id === action.payload.userId
+      );
+
+      user.followers = action.payload.userFollowers;
+    },
+    [fetchFollowers.rejected]: (state, action) => {
+      state.status = "rejected";
+      state.error = action.error.message;
+    },
+  },
+});
 
 export default usersSlice.reducer;
 
 export const selectAllUsers = (state) => state.users.users;
 export const selectUserStatus = (state) => state.users.status;
+export const selectUserByUsername = (state, username) =>
+  state.users.users.find((user) => user?.username === username);

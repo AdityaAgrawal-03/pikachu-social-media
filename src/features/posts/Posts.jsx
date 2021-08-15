@@ -1,5 +1,5 @@
 import { useSelector } from "react-redux";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import Avatar from "react-avatar";
 import "../../index.css";
 import { selectAllPosts } from "./postsSlice";
@@ -9,8 +9,9 @@ import { PostReaction } from "../index";
 export function Posts() {
   const posts = useSelector(selectAllPosts);
   const user = useSelector(selectCurrentUser);
+  const navigate = useNavigate();
 
-  console.log({ user, posts })
+  console.log({ user, posts });
 
   return (
     <div className="flex flex-col items-center mt-8">
@@ -29,10 +30,15 @@ export function Posts() {
               ])}
             />
             <div className="flex flex-col ml-4">
-              <p className="font-semibold">
+              <button
+                className="font-semibold text-left"
+                onClick={(e) =>{ 
+                  e.preventDefault();
+                  navigate(`/${post?.user?.username}`)}}
+              >
                 {post.user.name}{" "}
                 <small className="font-light"> @{post.user.username} </small>
-              </p>
+              </button>
               <p className="my-2">{post.content}</p>
               <div>
                 <PostReaction postId={post._id} userId={user._id} />
