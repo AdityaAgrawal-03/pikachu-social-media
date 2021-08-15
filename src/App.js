@@ -4,8 +4,21 @@ import { useNavigate } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import "./App.css";
 import { Home, PrivateRoute } from "./components";
-import { Post, Login, Signup } from "./features/index";
-import { selectToken, fetchPosts, selectPostStatus, fetchAllUsers, selectUserStatus } from "./features/index";
+import {
+  Post,
+  Login,
+  Signup,
+  Profile,
+  Followers,
+  Following,
+} from "./features/index";
+import {
+  selectToken,
+  fetchPosts,
+  selectPostStatus,
+  fetchAllUsers,
+  selectUserStatus,
+} from "./features/index";
 import { setUpAuthHeaderForServiceCalls } from "./utils/index";
 
 function App() {
@@ -33,7 +46,7 @@ function App() {
     if (token && userStatus === "idle") {
       dispatch(fetchAllUsers());
     }
-  }, [dispatch, token, userStatus])
+  }, [dispatch, token, userStatus]);
 
   return (
     <div className="bg-coolGray-200 min-h-screen">
@@ -43,6 +56,12 @@ function App() {
         <Route path="/signup" element={<Signup />} />
         <PrivateRoute path="/" element={<Home />} />
         <PrivateRoute path="/post/:postId" element={<Post />} />
+        <PrivateRoute path="/:username" element={<Profile />} />
+        <PrivateRoute path="/:username/followers" element={<Followers />} />
+        <PrivateRoute
+          path="/:username/following"
+          element={<Following />}
+        />
       </Routes>
     </div>
   );
