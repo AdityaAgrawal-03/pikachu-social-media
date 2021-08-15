@@ -50,6 +50,22 @@ export const fetchFollowers = createAsyncThunk(
   }
 );
 
+// update following and followers
+export const updateFollowingAndFollowers = createAsyncThunk(
+  "users/updateFollowingAndFollowers",
+  async ({ username, target_userId }) => {
+    try {
+      const {
+        data: { sourceUser, targetUser },
+      } = await axios.post(`${API_URL}/users/${username}/${target_userId}`);
+
+      return { sourceUser, targetUser };
+    } catch (error) {
+      console.error(error);
+    }
+  }
+);
+
 const usersSlice = createSlice({
   name: "users",
   initialState: {
@@ -97,6 +113,46 @@ const usersSlice = createSlice({
       user.followers = action.payload.userFollowers;
     },
     [fetchFollowers.rejected]: (state, action) => {
+      state.status = "rejected";
+      state.error = action.error.message;
+    },
+    [updateFollowingAndFollowers.pending]: (state, action) => {
+      state.status = "pending";
+    },
+    [updateFollowingAndFollowers.fulfilled]: (state, action) => {
+     
+      const sourceUser = state.users.find(
+        (user) => user._id === action.payload.sourceUser._id
+      );
+      const targetUser = state.users.find(
+        (user) => user._id === action.payload.targetUser._id
+      );
+
+      const isInTargetUserFollowers = targetUser.followers.includes(
+        sourceUser._id
+      );
+
+      if (!isInTargetUserFollowers) {
+        targetUser.followers.push(sourceUser._id);
+        sourceUser.following.push(targetUser._id);
+      } else {
+        const indexOfSourceUser = targetUser.followers.findIndex(
+          (userId) => userId === sourceUser._id
+        );
+        if (indexOfSourceUser > -1) {
+          targetUser.followers.splice(indexOfSourceUser, 1);
+        }
+
+        const indexOfTargetUser = sourceUser.following.findIndex(userId => userId === targetUser._id);
+
+        if (indexOfTargetUser > -1) {
+          sourceUser.following.splice(indexOfTargetUser, 1)
+        }
+      }
+
+      state.status = "success";
+    },
+    [updateFollowingAndFollowers.rejected]: (state, action) => {
       state.status = "rejected";
       state.error = action.error.message;
     },

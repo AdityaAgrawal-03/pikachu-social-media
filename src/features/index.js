@@ -15,6 +15,6 @@ export { Following } from "./users/Following"
 
 export { selectToken, selectCurrentUser } from "./authentication/authenticationSlice"
 export { fetchPosts, selectPostStatus, selectPostById } from "./posts/postsSlice";
-export { fetchAllUsers, selectUserStatus, selectAllUsers, selectUserByUsername, fetchFollowing, fetchFollowers } from "./users/usersSlice"
+export { fetchAllUsers, selectUserStatus, selectAllUsers, selectUserByUsername, fetchFollowing, fetchFollowers, updateFollowingAndFollowers } from "./users/usersSlice"
 
 
