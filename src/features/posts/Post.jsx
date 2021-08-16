@@ -11,6 +11,10 @@ export function Post() {
   const post = useSelector((state) => selectPostById(state, postId));
   const navigate = useNavigate();
 
+  console.log(typeof post.createdAt)
+  const converted = new Date(post?.createdAt)
+  console.log( converted)
+
   return (
     <div className="min-h-screen">
       {post ? (
@@ -29,7 +33,7 @@ export function Post() {
             />
             <div className="flex flex-col ml-4">
               <button
-                className="font-semibold text-left"
+                className="font-semibold text-left hover:underline"
                 onClick={(e) => {
                   e.preventDefault();
                   navigate(`/${post?.user?.username}`);

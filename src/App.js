@@ -11,6 +11,7 @@ import {
   Profile,
   Followers,
   Following,
+  EditProfile,
 } from "./features/index";
 import {
   selectToken,
@@ -58,10 +59,8 @@ function App() {
         <PrivateRoute path="/post/:postId" element={<Post />} />
         <PrivateRoute path="/:username" element={<Profile />} />
         <PrivateRoute path="/:username/followers" element={<Followers />} />
-        <PrivateRoute
-          path="/:username/following"
-          element={<Following />}
-        />
+        <PrivateRoute path="/:username/following" element={<Following />} />
+        <PrivateRoute path="/settings/profile" element={<EditProfile />} />
       </Routes>
     </div>
   );

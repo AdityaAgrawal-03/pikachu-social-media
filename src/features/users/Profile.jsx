@@ -60,16 +60,22 @@ export function Profile() {
                 </p>
               </div>
             </div>
-            <button
-              className={
-                isInFollowers
-                  ? "text-white py-2 px-6 bg-red-500 rounded-lg h-10"
-                  : "text-white py-2 px-6 bg-blue-500 rounded-lg h-10"
-              }
-              onClick={updateFollowingAndFollowersAction}
-            >
-              {isInFollowers ? <p> Unfollow </p> : <p> Follow </p>}
-            </button>
+            {username === currentUser?.username ? (
+              <button className="text-black py-2 px-6 bg-coolGray-50 border-coolGray-400 border-2 rounded-lg h-10 hover:bg-coolGray-300" onClick={() => navigate("/settings/profile")}>
+                Edit profile
+              </button>
+            ) : (
+              <button
+                className={
+                  isInFollowers
+                    ? "text-white py-2 px-6 bg-red-500 rounded-lg h-10"
+                    : "text-white py-2 px-6 bg-blue-500 rounded-lg h-10"
+                }
+                onClick={updateFollowingAndFollowersAction}
+              >
+                {isInFollowers ? <p> Unfollow </p> : <p> Follow </p>}
+              </button>
+            )}
           </div>
           {posts.map((post) => (
             <PostCard key={post._id} post={post} />

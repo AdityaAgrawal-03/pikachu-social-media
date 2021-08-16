@@ -2,21 +2,26 @@ import { useSelector } from "react-redux";
 import { Link, useNavigate } from "react-router-dom";
 import Avatar from "react-avatar";
 import "../../index.css";
-import { selectAllPosts } from "./postsSlice";
-import { selectCurrentUser } from "../authentication/authenticationSlice";
-import { PostReaction } from "../index";
+import {
+  PostReaction,
+  selectCurrentUser,
+  selectAllPosts,
+  TimeAgo,
+} from "../index";
 
 export function Posts() {
   const posts = useSelector(selectAllPosts);
   const user = useSelector(selectCurrentUser);
   const navigate = useNavigate();
 
-  console.log({ user, posts });
+  const orderedPosts = posts.slice().sort((a, b) => {
+    return new Date(b?.createdAt) - new Date(a?.createdAt);
+  });
 
   return (
     <div className="flex flex-col items-center mt-8">
       {posts &&
-        posts.map((post) => (
+        orderedPosts.map((post) => (
           <Link to={`/post/${post._id}`} className="post-card" key={post._id}>
             <Avatar
               name={user?.name}
@@ -30,15 +35,20 @@ export function Posts() {
               ])}
             />
             <div className="flex flex-col ml-4">
-              <button
-                className="font-semibold text-left"
-                onClick={(e) =>{ 
-                  e.preventDefault();
-                  navigate(`/${post?.user?.username}`)}}
-              >
-                {post.user.name}{" "}
-                <small className="font-light"> @{post.user.username} </small>
-              </button>
+              <div>
+                <button
+                  className="font-semibold text-left hover:underline mr-2"
+                  onClick={(e) => {
+                    e.preventDefault();
+                    navigate(`/${post?.user?.username}`);
+                  }}
+                >
+                  {post.user.name}
+                  <small className="font-light"> @{post.user.username} </small>
+                </button>
+                <TimeAgo timestamp={post?.createdAt} />
+              </div>
+
               <p className="my-2">{post.content}</p>
               <div>
                 <PostReaction postId={post._id} userId={user._id} />

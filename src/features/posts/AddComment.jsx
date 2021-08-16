@@ -16,7 +16,7 @@ export function AddComment({ postId }) {
   };
 
   return (
-    <div className="bg-coolGray-50 w-11/12 rounded-xl p-4 flex">
+    <div className="bg-coolGray-50 w-11/12 rounded-xl p-4 flex mb-4">
       <Avatar name={user?.name} round={true} />
       <form className="w-full ml-4">
         <textarea

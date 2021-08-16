@@ -16,7 +16,7 @@ export function CommentCard({ comment }) {
       <Avatar name="aditya agrawal" round={true} />
       <div className="flex flex-col ml-4">
         <button
-          className="font-semibold text-left"
+          className="font-semibold text-left hover:underline"
           onClick={(e) => {
             e.preventDefault();
             navigate(`/${commentUser?.username}`);

@@ -12,7 +12,7 @@ export function Navbar() {
       <p> Home </p>
       <p> Search </p>
       <p> Notifications </p>
-      <Link to={`profile/${currentUser.username}`}>
+      <Link to={`/${currentUser.username}`}>
         <p> Profile </p>
       </Link>
 

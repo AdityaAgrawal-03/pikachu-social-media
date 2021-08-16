@@ -135,7 +135,7 @@ const postsSlice = createSlice({
     },
     [addComment.fulfilled]: (state, action) => {
       console.log(action.payload);
-      const post = state.posts.find(post => post._id === action.payload._id);
+      const post = state.posts.find((post) => post._id === action.payload._id);
       post.comment = action.payload.comment;
       state.status = "success";
     },
@@ -154,4 +154,5 @@ export const selectAllPosts = (state) => state.posts.posts;
 export const selectPostStatus = (state) => state.posts.status;
 export const selectPostById = (state, postId) =>
   state.posts.posts.find((post) => post?._id === postId);
-export const selectPostByUserId = (state, userId) => state.posts.posts.filter((post) => post.user._id === userId)
+export const selectPostByUserId = (state, userId) =>
+  state.posts.posts.filter((post) => post.user._id === userId);
