@@ -5,13 +5,16 @@ import { selectCurrentUser, selectToken } from "../features/index";
 export function Navbar() {
   const token = useSelector(selectToken);
   const currentUser = useSelector(selectCurrentUser);
-  console.log({ token });
-
+  
   return (
     <div className="flex flex-col items-center justify-around text-xl bg-coolGray-50 rounded-xl w-1/6 h-4/5 fixed mt-8 ml-28">
-      <p> Home </p>
+      <Link to="/">
+        <p> Home </p>
+      </Link>
       <p> Search </p>
-      <p> Notifications </p>
+      <Link to="/notifications">
+        <p> Notifications </p>
+      </Link>
       <Link to={`/${currentUser.username}`}>
         <p> Profile </p>
       </Link>

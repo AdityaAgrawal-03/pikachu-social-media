@@ -1,7 +1,7 @@
 import "../../index.css";
 import { Link } from "react-router-dom";
 import Avatar from "react-avatar";
-import { PostReaction, selectCurrentUser } from "../index";
+import { PostReaction, selectCurrentUser, TimeAgo } from "../index";
 import { useSelector } from "react-redux";
 
 export function PostCard({ post }) {
@@ -12,10 +12,14 @@ export function PostCard({ post }) {
       <div className="post-card w-1/2 mx-auto">
         <Avatar name={post?.user.name} round={true} />
         <div className="flex flex-col ml-4">
-          <p className="font-semibold">
-            {post?.user?.name}
-            <small className="font-light"> @{post?.user?.username} </small>
-          </p>
+          <div>
+            <p className="font-semibold">
+              {post?.user?.name}
+              <small className="font-light"> @{post?.user?.username} </small>
+            </p>
+            <TimeAgo timestamp={post?.createdAt} />
+          </div>
+
           <p className="my-2"> {post?.content} </p>
           <div>
             <PostReaction postId={post._id} userId={currentUser?._id} />
