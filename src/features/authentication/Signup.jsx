@@ -4,8 +4,8 @@ import { useNavigate } from "react-router-dom";
 import {
   signupUser,
   selectAuthStatus,
-  selectAuthError,
-} from "./authenticationSlice";
+  
+} from "../index";
 
 export function Signup() {
   const [name, setName] = useState("");
@@ -14,14 +14,11 @@ export function Signup() {
   const [password, setPassword] = useState("");
 
   const status = useSelector(selectAuthStatus);
-  const error = useSelector(selectAuthError);
+ 
   const dispatch = useDispatch();
 
   const navigate = useNavigate();
-
-  console.log({ status });
-  console.log({ error })
-
+  
   useEffect(() => {
     if (status === "signed up") {
       navigate("/");
