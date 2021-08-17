@@ -6,21 +6,12 @@ import { API_URL, setUpAuthHeaderForServiceCalls } from "../../utils/index";
 export const loginUser = createAsyncThunk(
   "users/loginUser",
   async ({ email, password }) => {
-    console.log({ email, password });
-    try {
-      const {
-        data: { token, user },
-      } = await axios.post(`${API_URL}/login`, {
-        email,
-        password,
-      });
+    const response = await axios.post(`${API_URL}/login`, {
+      email,
+      password,
+    });
 
-      console.log({ token, user })
-
-      return { token, user };
-    } catch (error) {
-      console.error(error);
-    }
+    return { token: response.data.token, user: response.data.user };
   }
 );
 
@@ -28,18 +19,14 @@ export const loginUser = createAsyncThunk(
 export const signupUser = createAsyncThunk(
   "users/signupUser",
   async ({ name, username, email, password }) => {
-    try {
-      const { data: token } = await axios.post(`${API_URL}/signup`, {
-        name,
-        username,
-        email,
-        password,
-      });
-      console.log({ token });
-      return token;
-    } catch (error) {
-      console.error(error);
-    }
+    const { data: token } = await axios.post(`${API_URL}/signup`, {
+      name,
+      username,
+      email,
+      password,
+    });
+
+    return token;
   }
 );
 
@@ -51,20 +38,35 @@ const authSlice = createSlice({
     status: "idle",
     error: null,
   },
-  reducers: {},
+  reducers: {
+    logout: (state, action) => {
+      localStorage?.removeItem("token");
+      localStorage?.removeItem("user");
+      state.token = null;
+      state.currentUser = null;
+      state.status = "idle";
+      state.error = null;
+    },
+  },
   extraReducers: {
     [loginUser.pending]: (state, action) => {
       state.status = "signing in";
     },
     [loginUser.fulfilled]: (state, action) => {
+      console.log(state.status);
       state.status = "signed in";
       state.token = action.payload.token;
       localStorage?.setItem("token", JSON.stringify({ token: state.token }));
       setUpAuthHeaderForServiceCalls(state.token);
       state.currentUser = action.payload.user;
-      localStorage?.setItem("user", JSON.stringify({ user: state.currentUser }))
+      localStorage?.setItem(
+        "user",
+        JSON.stringify({ user: state.currentUser })
+      );
     },
     [loginUser.rejected]: (state, action) => {
+      console.log(state.status);
+      console.log(action.payload);
       state.status = "failed";
       state.error = action.error.message;
     },
@@ -84,8 +86,11 @@ const authSlice = createSlice({
   },
 });
 
+export const { logout } = authSlice.actions;
+
 export default authSlice.reducer;
 
-export const selectToken = state => state.auth.token;
-export const selectCurrentUser = state => state.auth.currentUser;
-export const selectAuthStatus = state => state.auth.status;
+export const selectToken = (state) => state.auth.token;
+export const selectCurrentUser = (state) => state.auth.currentUser;
+export const selectAuthStatus = (state) => state.auth.status;
+export const selectAuthError = (state) => state.auth.error;

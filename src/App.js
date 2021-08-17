@@ -12,6 +12,7 @@ import {
   Followers,
   Following,
   EditProfile,
+  Notifications,
 } from "./features/index";
 import {
   selectToken,
@@ -20,7 +21,10 @@ import {
   fetchAllUsers,
   selectUserStatus,
 } from "./features/index";
-import { setUpAuthHeaderForServiceCalls } from "./utils/index";
+import {
+  setUpAuthHeaderForServiceCalls,
+  setUpAuthExceptionHandler,
+} from "./utils/index";
 
 function App() {
   const token = useSelector(selectToken);
@@ -28,6 +32,10 @@ function App() {
   const userStatus = useSelector(selectUserStatus);
   const dispatch = useDispatch();
   const navigate = useNavigate();
+
+  useEffect(() => {
+    setUpAuthExceptionHandler(dispatch);
+  }, [dispatch]);
 
   useEffect(() => {
     if (token) {
@@ -56,6 +64,7 @@ function App() {
         <Route path="/login" element={<Login />} />
         <Route path="/signup" element={<Signup />} />
         <PrivateRoute path="/" element={<Home />} />
+        <PrivateRoute path="/notifications" element={<Notifications />} />
         <PrivateRoute path="/post/:postId" element={<Post />} />
         <PrivateRoute path="/:username" element={<Profile />} />
         <PrivateRoute path="/:username/followers" element={<Followers />} />

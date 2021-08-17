@@ -3,69 +3,49 @@ import axios from "axios";
 import { API_URL } from "../../utils/constants";
 
 export const fetchPosts = createAsyncThunk("posts/fetchPosts", async () => {
-  try {
-    const response = await axios.get(`${API_URL}/posts`);
-    return response.data.posts;
-  } catch (error) {
-    console.error(error);
-  }
+  const response = await axios.get(`${API_URL}/posts`);
+  return response.data.posts;
 });
 
 export const addPost = createAsyncThunk(
   "posts/addPost",
   async ({ content }) => {
-    try {
-      const response = await axios.post(`${API_URL}/posts`, {
-        content: content,
-      });
-      console.log({ response });
-      return response.data.post;
-    } catch (error) {
-      console.error(error);
-    }
+    const response = await axios.post(`${API_URL}/posts`, {
+      content: content,
+    });
+    
+    return response.data.post;
   }
 );
 
 export const likeButtonPressed = createAsyncThunk(
   "posts/likeButtonPressed",
   async ({ postId }) => {
-    try {
-      const {
-        data: { post, userId },
-      } = await axios.post(`${API_URL}/posts/like/${postId}`);
-      return { post, userId };
-    } catch (error) {
-      console.error(error);
-    }
+    const {
+      data: { post, userId },
+    } = await axios.post(`${API_URL}/posts/like/${postId}`);
+    return { post, userId };
   }
 );
 
 export const fetchPostById = createAsyncThunk(
   "posts/fetchPostById",
   async ({ postId }) => {
-    try {
-      const {
-        data: { post },
-      } = await axios.get(`${API_URL}/posts/${postId}`);
-      return post;
-    } catch (error) {
-      console.error(error);
-    }
+    const {
+      data: { post },
+    } = await axios.get(`${API_URL}/posts/${postId}`);
+    return post;
   }
 );
 
 export const addComment = createAsyncThunk(
   "posts/addComment",
   async ({ postId, comment }) => {
-    try {
-      const response = await axios.post(`${API_URL}/posts/comment/${postId}`, {
-        comment: comment,
-      });
-      console.log({ response });
-      return response.data.post;
-    } catch (error) {
-      console.error(error);
-    }
+    const response = await axios.post(`${API_URL}/posts/comment/${postId}`, {
+      comment: comment,
+    });
+    
+    return response.data.post;
   }
 );
 

@@ -16,7 +16,9 @@ export { Followers } from "./users/Followers";
 export { Following } from "./users/Following";
 export { EditProfile } from "./users/EditProfile";
 
-export { selectToken, selectCurrentUser } from "./authentication/authenticationSlice"
+export { Notifications } from "./notifications/Notifications";
+
+export { selectToken, selectCurrentUser, logout, selectAuthError, loginUser, selectAuthStatus } from "./authentication/authenticationSlice"
 export { fetchPosts, selectPostStatus, selectPostById, selectPostByUserId, selectAllPosts } from "./posts/postsSlice";
 export { fetchAllUsers, selectUserStatus, selectAllUsers, selectUserByUsername, fetchFollowing, fetchFollowers, updateFollowingAndFollowers } from "./users/usersSlice"
 

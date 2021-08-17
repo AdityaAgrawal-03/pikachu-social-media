@@ -8,7 +8,7 @@ export function Signup() {
   const [username, setUsername] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  // const [bio, setBio] = useState("");
+  const [bio, setBio] = useState("");
 
   const status = useSelector(selectAuthStatus);
   const dispatch = useDispatch();
@@ -79,6 +79,18 @@ export function Signup() {
             value={password}
             required={true}
             onChange={(e) => setPassword(() => e.target.value)}
+          />
+        </label>
+        <label htmlFor="bio">
+          {" "}
+          Bio
+          <input
+            id="bio"
+            type="text"
+            placeholder="Tell us about yourself"
+            required={true}
+            value={bio}
+            onChange={(e) => setBio(() => e.target.value)}
           />
         </label>
         <button type="button" onClick={signup}>

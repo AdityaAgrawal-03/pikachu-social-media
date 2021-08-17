@@ -22,7 +22,7 @@ export function Posts() {
     <div className="flex flex-col items-center mt-8">
       {posts &&
         orderedPosts.map((post) => (
-          <Link to={`/post/${post._id}`} className="post-card" key={post._id}>
+          <Link to={`/post/${post?._id}`} className="post-card" key={post?._id}>
             <Avatar
               name={user?.name}
               round={true}
