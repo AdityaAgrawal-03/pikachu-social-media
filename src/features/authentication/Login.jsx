@@ -30,14 +30,13 @@ export function Login() {
   return (
     <div className="flex flex-col items-center">
       <h1 className="text-3xl my-8"> Welcome to pikachu </h1>
-      
       <div className="flex flex-col rounded-xl bg-coolGray-50 p-4 w-1/2">
         <h2 className="text-2xl text-center uppercase"> Login </h2>
         <form className="flex flex-col items-center mt-4 text-xl">
           <label>
             Email
             <input
-              className="form-input"
+              className={status === "failed" ?  "form-input ring-2 ring-red-500" : "form-input"}
               name="email"
               id="email"
               placeholder="email"
@@ -50,7 +49,7 @@ export function Login() {
           <label>
             Password
             <input
-              className="form-input"
+              className={status === "failed" ?  "form-input ring-2 ring-red-500" : "form-input"}
               name="password"
               id="password"
               placeholder="password"

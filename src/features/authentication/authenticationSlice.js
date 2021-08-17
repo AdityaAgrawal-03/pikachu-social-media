@@ -1,6 +1,6 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import axios from "axios";
-import { API_URL, setUpAuthHeaderForServiceCalls } from "../../utils/index";
+import { API_URL } from "../../utils/index";
 
 // login
 export const loginUser = createAsyncThunk(
@@ -19,14 +19,14 @@ export const loginUser = createAsyncThunk(
 export const signupUser = createAsyncThunk(
   "users/signupUser",
   async ({ name, username, email, password }) => {
-    const { data: token } = await axios.post(`${API_URL}/signup`, {
+    const response = await axios.post(`${API_URL}/signup`, {
       name,
       username,
       email,
       password,
     });
 
-    return token;
+    return { token: response.data.token, user: response.data.user };
   }
 );
 
@@ -53,11 +53,10 @@ const authSlice = createSlice({
       state.status = "signing in";
     },
     [loginUser.fulfilled]: (state, action) => {
-      console.log(state.status);
       state.status = "signed in";
       state.token = action.payload.token;
       localStorage?.setItem("token", JSON.stringify({ token: state.token }));
-      setUpAuthHeaderForServiceCalls(state.token);
+
       state.currentUser = action.payload.user;
       localStorage?.setItem(
         "user",
@@ -65,8 +64,7 @@ const authSlice = createSlice({
       );
     },
     [loginUser.rejected]: (state, action) => {
-      console.log(state.status);
-      console.log(action.payload);
+      console.log(action);
       state.status = "failed";
       state.error = action.error.message;
     },
@@ -74,12 +72,19 @@ const authSlice = createSlice({
       state.status = "signing up";
     },
     [signupUser.fulfilled]: (state, action) => {
+      console.log(action.payload)
       state.status = "signed up";
-      state.token = action.payload;
+      state.token = action.payload.token;
       localStorage?.setItem("token", JSON.stringify({ token: state.token }));
-      setUpAuthHeaderForServiceCalls(state.token);
+
+      state.currentUser = action.payload.user;
+      localStorage?.setItem(
+        "user",
+        JSON.stringify({ user: state.currentUser })
+      );
     },
     [signupUser.rejected]: (state, action) => {
+      console.log("here")
       state.status = "failed";
       state.error = action.error.message;
     },
