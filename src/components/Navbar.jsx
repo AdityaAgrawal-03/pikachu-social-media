@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { Link } from "react-router-dom";
-import { AddPost, selectCurrentUser, selectToken } from "../features/index";
+import {  selectCurrentUser, selectToken } from "../features/index";
 import { logout } from "../features/authentication/authenticationSlice";
 
 export function Navbar() {

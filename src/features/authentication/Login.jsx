@@ -13,8 +13,6 @@ export function Login() {
   const status = useSelector(selectAuthStatus);
   const error = useSelector(selectAuthError);
 
-  console.log({ status });
-
   useEffect(() => {
     if (status === "signed in") {
       navigate("/");

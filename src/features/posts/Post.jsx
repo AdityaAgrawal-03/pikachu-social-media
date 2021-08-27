@@ -1,19 +1,39 @@
 import "../../index.css";
 import Avatar from "react-avatar";
 import { useParams, useNavigate } from "react-router-dom";
-import { useSelector } from "react-redux";
-import { PostReaction, AddComment, CommentCard, TimeAgo, selectPostById, selectCurrentUser } from "../index";
+import { useSelector, useDispatch } from "react-redux";
+import {
+  PostReaction,
+  AddComment,
+  CommentCard,
+  TimeAgo,
+  selectPostById,
+  selectCurrentUser,
+  selectPostStatus
+} from "../index";
+import { deletePost } from "./postsSlice"
+
 
 export function Post() {
   const { postId } = useParams();
   const user = useSelector(selectCurrentUser);
   const post = useSelector((state) => selectPostById(state, postId));
+  const status = useSelector(selectPostStatus)
   const navigate = useNavigate();
-  
+
+  const dispatch = useDispatch();
+
+  console.log({ status })
+
+  const deletePostAction = () => {
+    dispatch(deletePost({ postId: postId }));
+    navigate("/", { replace: true })
+  }
+
   return (
-    <div className="min-h-screen">
+    <div className="min-h-screen flex">
       {post ? (
-        <div className="mx-auto w-1/2">
+        <div className="mx-auto w-1/2 mt-8">
           <section className="post-card">
             <Avatar
               name={user?.name}
@@ -26,20 +46,33 @@ export function Post() {
                 "#9CA3AF",
               ])}
             />
-            <div className="flex flex-col ml-4">
-            <div>
-                <button
-                  className="font-semibold text-left hover:underline mr-2"
-                  onClick={(e) => {
-                    e.preventDefault();
-                    navigate(`/${post?.user?.username}`);
-                  }}
-                >
-                  {post.user.name}
-                  <small className="font-light"> @{post.user.username} </small>
-                </button>
-                <TimeAgo timestamp={post?.createdAt} />
+            <div className="flex flex-col ml-4 w-full">
+              <div className="flex relative">
+                <div>
+                  <button
+                    className="font-semibold text-left hover:underline mr-2"
+                    onClick={(e) => {
+                      e.preventDefault();
+                      navigate(`/${post?.user?.username}`);
+                    }}
+                  >
+                    {post.user.name}
+                    <small className="font-light">
+                      {" "}
+                      @{post.user.username}{" "}
+                    </small>
+                  </button>
+                  <TimeAgo timestamp={post?.createdAt} />
+                </div>
+                {user?.username === post?.user?.username && (
+                  <button onClick={deletePostAction}>
+                    <span className="material-icons-round coolGray-400 absolute top-0 right-0">
+                      delete
+                    </span>
+                  </button>
+                )}
               </div>
+
               <p className="my-2">{post?.content}</p>
               <div>
                 <PostReaction postId={post?._id} userId={user?._id} />
