@@ -15,6 +15,7 @@ export { UsersSuggestion } from "./users/UsersSuggestion"
 export { Followers } from "./users/Followers";
 export { Following } from "./users/Following";
 export { EditProfile } from "./users/EditProfile";
+export { Search } from "./users/Search";
 
 export { Notifications } from "./notifications/Notifications";
 

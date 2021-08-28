@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { Link } from "react-router-dom";
-import {  selectCurrentUser, selectToken } from "../features/index";
+import { selectCurrentUser, selectToken } from "../features/index";
 import { logout } from "../features/authentication/authenticationSlice";
 
 export function Navbar() {
@@ -17,7 +17,11 @@ export function Navbar() {
         <Link to="/">
           <p> Home </p>
         </Link>
-        <p> Search </p>
+        <Link to="/search">
+          {" "}
+          <p> Search </p>{" "}
+        </Link>
+
         <Link to="/notifications">
           <p> Notifications </p>
         </Link>

@@ -13,6 +13,7 @@ import {
   Following,
   EditProfile,
   Notifications,
+  Search
 } from "./features/index";
 import {
   selectToken,
@@ -65,6 +66,7 @@ function App() {
           <Routes>
             <PrivateRoute path="/" element={<Home />} />
             <PrivateRoute path="/notifications" element={<Notifications />} />
+            <PrivateRoute path="/search" element={<Search />} />
             <PrivateRoute path="/post/:postId" element={<Post />} />
             <PrivateRoute path="/:username" element={<Profile />} />
             <PrivateRoute path="/:username/followers" element={<Followers />} />
