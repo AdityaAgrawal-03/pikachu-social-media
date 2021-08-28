@@ -21,7 +21,7 @@ export function Navbar() {
         <Link to="/notifications">
           <p> Notifications </p>
         </Link>
-        <Link to={`/${currentUser.username}`}>
+        <Link to={`/${currentUser?.username}`}>
           <p> Profile </p>
         </Link>
 

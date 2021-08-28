@@ -120,7 +120,9 @@ const usersSlice = createSlice({
       state.status = "pending";
     },
     [updateFollowingAndFollowers.fulfilled]: (state, action) => {
-     
+      
+      console.log(action.payload)
+
       const sourceUser = state.users.find(
         (user) => user._id === action.payload.sourceUser._id
       );

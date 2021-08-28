@@ -30,7 +30,7 @@ export function Posts() {
         orderedPosts.map((post) => (
           <Link to={`/post/${post?._id}`} className="post-card" key={post?._id}>
             <Avatar
-              name={user?.name}
+              name={post?.user?.name}
               round={true}
               color={Avatar.getRandomColor("sitebase", [
                 "#F9FAFB",

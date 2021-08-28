@@ -58,8 +58,8 @@ export function Post() {
                   >
                     {post.user.name}
                     <small className="font-light">
-                      {" "}
-                      @{post.user.username}{" "}
+                        
+                      @{post.user.username} 
                     </small>
                   </button>
                   <TimeAgo timestamp={post?.createdAt} />

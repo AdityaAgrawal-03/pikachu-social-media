@@ -3,7 +3,7 @@ import { Routes, Route } from "react-router";
 import { useNavigate } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import "./App.css";
-import { Home, PrivateRoute } from "./components";
+import { Home, Navbar, PrivateRoute } from "./components";
 import {
   Post,
   Login,
@@ -60,16 +60,20 @@ function App() {
   return (
     <div className="bg-coolGray-200 min-h-screen">
       <Routes>
-        {/* <Route path="/" element={<LandingPage />} /> */}
+        <div>
+          <Navbar />
+          <Routes>
+            <PrivateRoute path="/" element={<Home />} />
+            <PrivateRoute path="/notifications" element={<Notifications />} />
+            <PrivateRoute path="/post/:postId" element={<Post />} />
+            <PrivateRoute path="/:username" element={<Profile />} />
+            <PrivateRoute path="/:username/followers" element={<Followers />} />
+            <PrivateRoute path="/:username/following" element={<Following />} />
+            <PrivateRoute path="/settings/profile" element={<EditProfile />} />
+          </Routes>
+        </div>
         <Route path="/login" element={<Login />} />
         <Route path="/signup" element={<Signup />} />
-        <PrivateRoute path="/" element={<Home />} />
-        <PrivateRoute path="/notifications" element={<Notifications />} />
-        <PrivateRoute path="/post/:postId" element={<Post />} />
-        <PrivateRoute path="/:username" element={<Profile />} />
-        <PrivateRoute path="/:username/followers" element={<Followers />} />
-        <PrivateRoute path="/:username/following" element={<Following />} />
-        <PrivateRoute path="/settings/profile" element={<EditProfile />} />
       </Routes>
     </div>
   );
