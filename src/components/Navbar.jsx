@@ -1,11 +1,9 @@
-import { useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { Link } from "react-router-dom";
 import { selectCurrentUser, selectToken } from "../features/index";
 import { logout } from "../features/authentication/authenticationSlice";
 
 export function Navbar() {
-  const [modal, setModal] = useState(false);
   const token = useSelector(selectToken);
   const currentUser = useSelector(selectCurrentUser);
 
@@ -18,8 +16,7 @@ export function Navbar() {
           <p> Home </p>
         </Link>
         <Link to="/search">
-          {" "}
-          <p> Search </p>{" "}
+          <p> Search </p>
         </Link>
 
         <Link to="/notifications">
@@ -30,10 +27,7 @@ export function Navbar() {
         </Link>
 
         {token && <button onClick={() => dispatch(logout())}> Signout </button>}
-        <button
-          className="text-white py-2 px-10 bg-blue-500 rounded-lg"
-          onClick={() => setModal(true)}
-        >
+        <button className="text-white py-2 px-10 bg-blue-500 rounded-lg">
           Post
         </button>
       </div>

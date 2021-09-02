@@ -30,11 +30,24 @@ export function Login() {
       <h1 className="text-3xl my-8"> Welcome to pikachu </h1>
       <div className="flex flex-col rounded-xl bg-coolGray-50 p-4 w-1/2">
         <h2 className="text-2xl text-center uppercase"> Login </h2>
+        <button
+          className="text-blue-500 font-bold"
+          onClick={() => {
+            setEmail("test@gmail.com");
+            setPassword("test");
+          }}
+        >
+          Use guest credentials
+        </button>
         <form className="flex flex-col items-center mt-4 text-xl">
           <label>
             Email
             <input
-              className={status === "failed" ?  "form-input ring-2 ring-red-500" : "form-input"}
+              className={
+                status === "failed"
+                  ? "form-input ring-2 ring-red-500"
+                  : "form-input"
+              }
               name="email"
               id="email"
               placeholder="email"
@@ -47,7 +60,11 @@ export function Login() {
           <label>
             Password
             <input
-              className={status === "failed" ?  "form-input ring-2 ring-red-500" : "form-input"}
+              className={
+                status === "failed"
+                  ? "form-input ring-2 ring-red-500"
+                  : "form-input"
+              }
               name="password"
               id="password"
               placeholder="password"
@@ -59,16 +76,20 @@ export function Login() {
           </label>
           <button
             type="button"
-            className="text-white py-2 px-6 bg-blue-500 rounded-lg"
+            className="text-white py-2 px-6 bg-blue-500 rounded-lg uppercase"
             onClick={login}
           >
-            Login
+            {status === "signing in" ? (
+              <p> Signing in... </p>
+            ) : (
+              <p> Sign in </p>
+            )}
           </button>
           {status === "failed" && <p> {error} </p>}
         </form>
         <p className="text-center mt-4">
           Don't have an account?
-          <Link to="/signup" className="text-blue-500">
+          <Link to="/signup" className="text-blue-500 ml-2 font-bold">
             Signup
           </Link>
         </p>

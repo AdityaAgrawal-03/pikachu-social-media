@@ -103,10 +103,10 @@ export function Signup() {
 
           <button
             type="button"
-            className="text-white py-2 px-6 bg-blue-500 rounded-lg mt-4"
+            className="text-white py-2 px-6 bg-blue-500 rounded-lg mt-4 uppercase"
             onClick={signup}
           >
-            Signup
+             {status === "signing up" ? <p> Signing Up... </p> : <p> Signup </p>} 
           </button>
         </form>
       </div>

@@ -7,9 +7,9 @@ export function UsersSuggestion() {
 
   console.log({ users })
 
-  const followingList = currentUser.following;
+  const followingList = currentUser?.following;
   
-  const filteredUsers = users.filter((user) => user._id !== currentUser._id);
+  const filteredUsers = users?.filter((user) => user._id !== currentUser?._id);
 
   // const whoToFollow = [];
 
