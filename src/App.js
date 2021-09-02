@@ -13,7 +13,7 @@ import {
   Following,
   EditProfile,
   Notifications,
-  Search
+  Search,
 } from "./features/index";
 import {
   selectToken,
@@ -31,6 +31,7 @@ function App() {
   const token = useSelector(selectToken);
   const postStatus = useSelector(selectPostStatus);
   const userStatus = useSelector(selectUserStatus);
+
   const dispatch = useDispatch();
   const navigate = useNavigate();
 

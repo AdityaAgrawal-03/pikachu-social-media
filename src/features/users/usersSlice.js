@@ -8,15 +8,23 @@ export const fetchAllUsers = createAsyncThunk(
   async () => {
     try {
       const response = await axios.get(
-        "https://pikachu-social-media.aditya365.repl.co/users"
+        `${API_URL}/users`
       );
-      console.log({ response });
-      return response.data.users;
+     return response.data.users;
     } catch (error) {
       console.error(error);
     }
   }
 );
+
+// user lookup
+export const getUser = createAsyncThunk("users/getUser", async ({ username }) => {
+  const response = await axios.get(`${API_URL}/users/${username}`);
+
+  console.log({ response })
+
+  return response.data.user
+})
 
 // getFollowing
 export const fetchFollowing = createAsyncThunk(
@@ -70,6 +78,7 @@ const usersSlice = createSlice({
   name: "users",
   initialState: {
     users: [],
+    fetchedUser: null,
     status: "idle",
     error: null,
   },
@@ -83,6 +92,18 @@ const usersSlice = createSlice({
       state.users = state.users.concat(action.payload);
     },
     [fetchAllUsers.rejected]: (state, action) => {
+      state.status = "failed";
+      state.error = action.error.message;
+    },
+    [getUser.pending]: (state) => {
+      state.status = "pending";
+    },
+    [getUser.fulfilled]: (state, action) => {
+      state.status = "success";
+      state.fetchedUser = action.payload;
+
+    },
+    [getUser.rejected]: (state, action) => {
       state.status = "failed";
       state.error = action.error.message;
     },
@@ -120,15 +141,15 @@ const usersSlice = createSlice({
       state.status = "pending";
     },
     [updateFollowingAndFollowers.fulfilled]: (state, action) => {
-      
-      console.log(action.payload)
-
+      console.log(action.payload);
       const sourceUser = state.users.find(
         (user) => user._id === action.payload.sourceUser._id
       );
       const targetUser = state.users.find(
         (user) => user._id === action.payload.targetUser._id
       );
+
+      console.log({ sourceUser })
 
       const isInTargetUserFollowers = targetUser.followers.includes(
         sourceUser._id
@@ -145,10 +166,12 @@ const usersSlice = createSlice({
           targetUser.followers.splice(indexOfSourceUser, 1);
         }
 
-        const indexOfTargetUser = sourceUser.following.findIndex(userId => userId === targetUser._id);
+        const indexOfTargetUser = sourceUser.following.findIndex(
+          (userId) => userId === targetUser._id
+        );
 
         if (indexOfTargetUser > -1) {
-          sourceUser.following.splice(indexOfTargetUser, 1)
+          sourceUser.following.splice(indexOfTargetUser, 1);
         }
       }
 
@@ -167,3 +190,4 @@ export const selectAllUsers = (state) => state.users.users;
 export const selectUserStatus = (state) => state.users.status;
 export const selectUserByUsername = (state, username) =>
   state.users.users.find((user) => user?.username === username);
+export const selectFetchedUser = (state) => state.users.fetchedUser;

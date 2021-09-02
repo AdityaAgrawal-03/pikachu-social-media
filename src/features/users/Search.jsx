@@ -45,6 +45,8 @@ export function Search() {
             user?.name.toLowerCase().includes(searchText.toLowerCase())
           ) {
             return user;
+          } else {
+            return user
           }
         })
         .map((user) => (

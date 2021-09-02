@@ -64,7 +64,6 @@ const authSlice = createSlice({
       );
     },
     [loginUser.rejected]: (state, action) => {
-      console.log(action);
       state.status = "failed";
       state.error = action.error.message;
     },
@@ -72,7 +71,6 @@ const authSlice = createSlice({
       state.status = "signing up";
     },
     [signupUser.fulfilled]: (state, action) => {
-      console.log(action.payload)
       state.status = "signed up";
       state.token = action.payload.token;
       localStorage?.setItem("token", JSON.stringify({ token: state.token }));
@@ -84,7 +82,7 @@ const authSlice = createSlice({
       );
     },
     [signupUser.rejected]: (state, action) => {
-      console.log("here")
+      console.log("here");
       state.status = "failed";
       state.error = action.error.message;
     },
