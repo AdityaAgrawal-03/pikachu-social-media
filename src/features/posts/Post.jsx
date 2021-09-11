@@ -9,7 +9,7 @@ import {
   TimeAgo,
   selectPostById,
   selectCurrentUser,
-  selectPostStatus
+  
 } from "../index";
 import { deletePost } from "./postsSlice"
 
@@ -18,12 +18,9 @@ export function Post() {
   const { postId } = useParams();
   const user = useSelector(selectCurrentUser);
   const post = useSelector((state) => selectPostById(state, postId));
-  const status = useSelector(selectPostStatus)
   const navigate = useNavigate();
 
   const dispatch = useDispatch();
-
-  console.log({ status })
 
   const deletePostAction = () => {
     dispatch(deletePost({ postId: postId }));
