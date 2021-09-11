@@ -34,8 +34,8 @@ export function UsersSuggestion() {
   }, [dispatch, currentUser?.username]);
 
   const filteredUsers = users
-    ?.filter((user) => user._id !== fetchedUser?._id)
-    .filter((user) => (followingList.includes(user._id) ? null : user));
+    ?.filter((user) => user?._id !== fetchedUser?._id)
+    ?.filter((user) => (followingList?.includes(user?._id) ? null : user));
 
   return (
     <div className="bg-coolGray-50 rounded-xl w-11/12 h-4/5 mr-4 flex flex-col items-center p-4">

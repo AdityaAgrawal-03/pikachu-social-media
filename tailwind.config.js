@@ -1,5 +1,5 @@
 module.exports = {
-  purge: ['./src/**/*.{js,jsx,ts,tsx}', './public/index.html'],
+  purge: ["./src/**/*.{js,jsx,ts,tsx}", "./public/index.html"],
   darkMode: false, // or 'media' or 'class'
   theme: {
     extend: {
@@ -10,12 +10,12 @@ module.exports = {
           200: "#E5E7EB",
           300: "#D1D5DB",
           400: "#9CA3AF",
-        }
-      }
+        },
+      },
     },
   },
   variants: {
     extend: {},
   },
   plugins: [],
-}
+};

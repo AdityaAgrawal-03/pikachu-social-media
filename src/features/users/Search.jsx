@@ -10,7 +10,8 @@ export function Search() {
   const filteredUsers = users.filter((user) => user._id !== currentUser?._id);
   const [searchText, setSearchText] = useState("");
 
-  const debounce = (fn, delay) => {
+  const debounce = function (fn, delay) {
+    console.log(this);
     let timer;
 
     return function () {
@@ -45,8 +46,6 @@ export function Search() {
             user?.name.toLowerCase().includes(searchText.toLowerCase())
           ) {
             return user;
-          } else {
-            return user
           }
         })
         .map((user) => (

@@ -2,15 +2,21 @@ import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import Avatar from "react-avatar";
 import { addPost } from "./postsSlice";
-import { selectCurrentUser } from "../index"
+import { selectCurrentUser } from "../index";
 
-export function AddPost() {
+export function AddPost({ setShow, show }) {
   const [newPost, setNewPost] = useState("");
   const dispatch = useDispatch();
   const user = useSelector(selectCurrentUser);
-
+  
   const addPostAction = () => {
     dispatch(addPost({ content: newPost }));
+    if (show) {
+      setTimeout(() => {
+        setShow(!show);
+      }, 1000);
+    }
+
     setNewPost("");
   };
 
