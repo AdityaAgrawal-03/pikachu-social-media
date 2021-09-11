@@ -12,13 +12,10 @@ export function Navbar() {
   const dispatch = useDispatch();
 
   return (
-    <div
-      className={show ? "w-full h-full fixed flex bg-black bg-opacity-60 z-10" : undefined}
-    >
-      <div className="left-1/4 top-1/3 w-1/2 relative">
-        {show && <AddPost setShow={setShow} show={show} />}
-      </div>
-      <div className="flex flex-col items-center justify-around text-xl bg-coolGray-50 rounded-xl w-1/6 h-4/5 fixed mt-8 ml-28">
+    <>
+      {show && <AddPost setShow={setShow} show={show} />}
+
+      <div className="flex flex-col items-center justify-around text-xl bg-coolGray-50 fixed  rounded-xl w-1/6 h-4/5  mt-8 ml-28">
         <Link to="/">
           <p> Home </p>
         </Link>
@@ -41,7 +38,6 @@ export function Navbar() {
           Post
         </button>
       </div>
-    </div>
+    </>
   );
 }
-

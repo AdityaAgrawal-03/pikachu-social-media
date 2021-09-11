@@ -8,7 +8,7 @@ export function AddPost({ setShow, show }) {
   const [newPost, setNewPost] = useState("");
   const dispatch = useDispatch();
   const user = useSelector(selectCurrentUser);
-  
+
   const addPostAction = () => {
     dispatch(addPost({ content: newPost }));
     if (show) {
@@ -21,29 +21,51 @@ export function AddPost({ setShow, show }) {
   };
 
   return (
-    <section className="flex border-2 w-11/12 rounded-xl p-4  bg-coolGray-50 mx-auto mt-8">
-      <Avatar name={user?.name} round={true} />
-      <form className="w-full h-4/5 ml-4">
-        <label htmlFor="newPost">
-          <textarea
-            className="p-2 w-full h-32 rounded-lg border-2 resize-none border-coolGray-300 focus:border-coolGray-500 focus:outline-none focus:ring-2 focus:ring-coolGray-500"
-            placeholder="What's on your mind?"
-            name="newPost"
-            id="newPost"
-            type="text"
-            maxLength="280"
-            value={newPost}
-            onChange={(e) => setNewPost(() => e.target.value)}
-          />
-        </label>
-        <button
-          type="button"
-          className="text-white py-2 px-6 bg-blue-500 rounded-lg"
-          onClick={addPostAction}
-        >
-          Add Post
-        </button>
-      </form>
-    </section>
+    <div
+      className={
+        show
+          ? "w-screen fixed flex bg-black bg-opacity-60 z-50 inset-0"
+          : undefined
+      }
+    >
+      <section
+        className={
+          show
+            ? "left-1/4 top-1/3 w-1/2 relative h-1/3 flex border-2 rounded-xl p-4 bg-coolGray-50"
+            : "flex border-2 w-11/12 rounded-xl p-4 bg-coolGray-50 mx-auto mt-8"
+        }
+      >
+        {show && (
+          <button
+            onClick={() => setShow(!show)}
+            className="absolute top-0 right-0 font-bold hover:bg-coolGray-400"
+          >
+            <span className="material-icons-round">close</span>
+          </button>
+        )}
+        <Avatar name={user?.name} round={true} />
+        <form className={show ? "w-full h-4/5 ml-4 mt-4" : "w-full h-4/5 ml-4"}>
+          <label htmlFor="newPost">
+            <textarea
+              className="p-2 w-full h-32 rounded-lg border-2 resize-none border-coolGray-300 focus:border-coolGray-500 focus:outline-none focus:ring-2 focus:ring-coolGray-500"
+              placeholder="What's on your mind?"
+              name="newPost"
+              id="newPost"
+              type="text"
+              maxLength="280"
+              value={newPost}
+              onChange={(e) => setNewPost(() => e.target.value)}
+            />
+          </label>
+          <button
+            type="button"
+            className="text-white py-2 px-6 bg-blue-500 rounded-lg"
+            onClick={addPostAction}
+          >
+            Add Post
+          </button>
+        </form>
+      </section>
+    </div>
   );
 }
