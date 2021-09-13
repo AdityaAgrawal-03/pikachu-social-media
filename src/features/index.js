@@ -20,7 +20,7 @@ export { Search } from "./users/Search";
 export { Notifications } from "./notifications/Notifications";
 
 export { selectToken, selectCurrentUser, logout, selectAuthError, loginUser, selectAuthStatus, signupUser } from "./authentication/authenticationSlice"
-export { fetchPosts, selectPostStatus, selectPostById, selectPostByUserId, selectAllPosts, deletePost } from "./posts/postsSlice";
+export { fetchPosts, selectPostStatus, selectPostById, selectPostByUserId, selectAllPosts, deletePost, deleteComment } from "./posts/postsSlice";
 export { fetchAllUsers, selectUserStatus, selectAllUsers, selectUserByUsername, selectFetchedUser, fetchFollowing, fetchFollowers, updateFollowingAndFollowers, getUser } from "./users/usersSlice"
 
 

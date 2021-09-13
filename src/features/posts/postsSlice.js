@@ -54,8 +54,18 @@ export const deletePost = createAsyncThunk(
   async ({ postId }) => {
     const response = await axios.delete(`${API_URL}/posts/${postId}`);
 
-    console.log({ response });
     return response.data.deletedPost;
+  }
+);
+
+export const deleteComment = createAsyncThunk(
+  "posts/deleteComment",
+  async ({ postId, commentId }) => {
+    const {
+      data: { post, commentToBeDeleted },
+    } = await axios.delete(`${API_URL}/posts/comment/${postId}/${commentId}`);
+
+    return { commentToBeDeleted, post };
   }
 );
 
@@ -146,6 +156,26 @@ const postsSlice = createSlice({
       state.status = "deleted";
     },
     [deletePost.rejected]: (state, action) => {
+      state.status = "rejected";
+      state.error = action.error.message;
+    },
+    [deleteComment.pending]: (state) => {
+      state.status = "deleting";
+    },
+    [deleteComment.fulfilled]: (state, action) => {
+      const post = state.posts.find((post) => post._id === action.payload.post);
+
+      const commentIndex = post.comment.findIndex(
+        (comment) => comment._id === action.payload.commentToBeDeleted._id
+      );
+
+      if (commentIndex > -1) {
+        post.comment.splice(commentIndex, 1);
+      }
+
+      state.status = "success";
+    },
+    [deleteComment.rejected]: (state, action) => {
       state.status = "rejected";
       state.error = action.error.message;
     },

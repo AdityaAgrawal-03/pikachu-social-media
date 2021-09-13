@@ -9,10 +9,8 @@ import {
   TimeAgo,
   selectPostById,
   selectCurrentUser,
-  
 } from "../index";
-import { deletePost } from "./postsSlice"
-
+import { deletePost } from "./postsSlice";
 
 export function Post() {
   const { postId } = useParams();
@@ -24,25 +22,15 @@ export function Post() {
 
   const deletePostAction = () => {
     dispatch(deletePost({ postId: postId }));
-    navigate("/", { replace: true })
-  }
+    navigate("/", { replace: true });
+  };
 
   return (
     <div className="min-h-screen flex">
       {post ? (
         <div className="mx-auto w-1/2 mt-8">
           <section className="post-card">
-            <Avatar
-              name={user?.name}
-              round={true}
-              color={Avatar.getRandomColor("sitebase", [
-                "#F9FAFB",
-                "#F3F4F6",
-                "#E5E7EB",
-                "#D1D5DB",
-                "#9CA3AF",
-              ])}
-            />
+            <Avatar name={user?.name} round={true} />
             <div className="flex flex-col ml-4 w-full">
               <div className="flex relative">
                 <div>
@@ -54,10 +42,7 @@ export function Post() {
                     }}
                   >
                     {post.user.name}
-                    <small className="font-light">
-                        
-                      @{post.user.username} 
-                    </small>
+                    <small className="font-light ml-2">@{post.user.username}</small>
                   </button>
                   <TimeAgo timestamp={post?.createdAt} />
                 </div>
@@ -83,7 +68,7 @@ export function Post() {
           </section>
           <AddComment postId={postId} />
           {post?.comment.map((comment) => (
-            <CommentCard key={comment._id} comment={comment} />
+            <CommentCard key={comment._id} comment={comment} postId={postId} />
           ))}
         </div>
       ) : (

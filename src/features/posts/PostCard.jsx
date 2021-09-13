@@ -12,8 +12,8 @@ export function PostCard({ post }) {
       <div className="post-card w-1/2 mx-auto">
         <Avatar name={post?.user.name} round={true} />
         <div className="flex flex-col ml-4">
-          <div>
-            <p className="font-semibold">
+          <div className="flex items-baseline">
+            <p className="font-semibold mr-2">
               {post?.user?.name}
               <small className="font-light"> @{post?.user?.username} </small>
             </p>

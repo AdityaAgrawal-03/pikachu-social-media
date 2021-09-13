@@ -29,17 +29,7 @@ export function Posts() {
       {posts &&
         orderedPosts.map((post) => (
           <Link to={`/post/${post?._id}`} className="post-card" key={post?._id}>
-            <Avatar
-              name={post?.user?.name}
-              round={true}
-              color={Avatar.getRandomColor("sitebase", [
-                "#F9FAFB",
-                "#F3F4F6",
-                "#E5E7EB",
-                "#D1D5DB",
-                "#9CA3AF",
-              ])}
-            />
+            <Avatar name={post?.user?.name} round={true}  />
             <div className="flex flex-col ml-4 w-full">
               <div className="flex relative">
                 <div>
@@ -51,10 +41,7 @@ export function Posts() {
                     }}
                   >
                     {post.user.name}
-                    <small className="font-light">
-                      {" "}
-                      @{post.user.username}{" "}
-                    </small>
+                    <small className="font-light ml-2">@{post.user.username}</small>
                   </button>
                   <TimeAgo timestamp={post?.createdAt} />
                 </div>
