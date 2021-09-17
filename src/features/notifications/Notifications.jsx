@@ -5,16 +5,16 @@ export function Notifications() {
   const users = useSelector(selectAllUsers);
   const currentUser = useSelector(selectCurrentUser);
 
- const filteredUsers = users.filter((user) => user._id !== currentUser?._id);
+ const filteredUsers = users?.filter((user) => user?._id !== currentUser?._id);
  
  const listOfUsers = filteredUsers.map((user) =>  {
     return { name: user?.name }; 
   })
 
   let notificationData = [
-    `${listOfUsers[Math.floor(Math.random() * listOfUsers.length)].name} liked your post`,
+    `${listOfUsers[Math.floor(Math.random() * listOfUsers.length)]?.name} liked your post`,
     `John Doe followed you`,
-    `${listOfUsers[Math.floor(Math.random() * listOfUsers.length)].name} commented on your post`,
+    `${listOfUsers[Math.floor(Math.random() * listOfUsers.length)]?.name} commented on your post`,
     `See what's trending in pikachu app`
   ]
   

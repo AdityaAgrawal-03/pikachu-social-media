@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import Avatar from "react-avatar";
 import { addPost } from "./postsSlice";
@@ -8,6 +8,7 @@ export function AddPost({ setShow, show }) {
   const [newPost, setNewPost] = useState("");
   const dispatch = useDispatch();
   const user = useSelector(selectCurrentUser);
+  const addPostElement = useRef();
 
   const addPostAction = () => {
     dispatch(addPost({ content: newPost }));
@@ -19,6 +20,10 @@ export function AddPost({ setShow, show }) {
 
     setNewPost("");
   };
+
+  useEffect(() => {
+    addPostElement.current.focus();
+  }, [])
 
   return (
     <div
@@ -54,6 +59,7 @@ export function AddPost({ setShow, show }) {
               type="text"
               maxLength="280"
               value={newPost}
+              ref={addPostElement}
               onChange={(e) => setNewPost(() => e.target.value)}
             />
           </label>

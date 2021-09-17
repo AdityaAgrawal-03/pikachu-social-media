@@ -8,7 +8,7 @@ export function PostCard({ post }) {
   const currentUser = useSelector(selectCurrentUser);
 
   return (
-    <Link to={`/post/${post._id}`}>
+    <Link to={`/post/${post._id}`}> 
       <div className="post-card w-1/2 mx-auto">
         <Avatar name={post?.user.name} round={true} />
         <div className="flex flex-col ml-4">
