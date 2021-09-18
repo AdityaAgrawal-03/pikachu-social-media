@@ -37,7 +37,7 @@ export function AddPost({ setShow, show }) {
         className={
           show
             ? "left-1/4 top-1/3 w-1/2 relative h-1/3 flex border-2 rounded-xl p-4 bg-coolGray-50"
-            : "flex border-2 w-11/12 rounded-xl p-4 bg-coolGray-50 mx-auto mt-8"
+            : "border-2 post-card mt-8 mx-auto mb-2"
         }
       >
         {show && (

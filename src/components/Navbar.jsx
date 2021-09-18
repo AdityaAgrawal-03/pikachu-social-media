@@ -15,7 +15,7 @@ export function Navbar() {
     <>
       {show && <AddPost setShow={setShow} show={show} />}
 
-      <div className="flex flex-col items-center justify-around text-xl bg-coolGray-50 fixed  rounded-xl w-1/6 h-4/5  mt-8 ml-28">
+      <div className="flex flex-col items-center justify-around text-xl bg-coolGray-50 fixed rounded-xl w-1/6 h-4/5 mt-8 ml-28">
         <Link to="/">
           <p> Home </p>
         </Link>

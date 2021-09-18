@@ -5,11 +5,12 @@
 
 @layer components {
   .post-card {
-    @apply bg-coolGray-50 rounded-xl w-11/12 flex mb-4 p-4 ml-4;
+    @apply bg-coolGray-50 rounded-xl w-11/12 flex mb-4 p-4;
   }
 
   .form-input {
     @apply bg-coolGray-300 mb-4 ml-4 px-4 py-2 rounded-lg focus:ring-blue-500 focus:ring-2 focus:outline-none
   }
 }
+
 

@@ -12,6 +12,19 @@ module.exports = {
           400: "#9CA3AF",
         },
       },
+      keyframes: {
+        transcend: {
+          "-50%": {
+            opacity: "0"
+          },
+          "0": {
+            opacity: "1"
+          }
+        }
+      },
+      animation: {
+        transcend: "transcend 1s ease-in-out 0.8s"
+      }
     },
   },
   variants: {
