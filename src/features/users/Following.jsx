@@ -23,7 +23,7 @@ export function Following() {
   return (
     <div className="flex">
       {userStatus !== "success" ? (
-        <div> Loading.. </div>
+        <div className="loader"> </div>
       ) : (
         <div className="flex flex-col items-center mx-auto w-1/2 mt-8">
           <h1 className="font-bold uppercase text-xl mb-4">following</h1>

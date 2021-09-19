@@ -24,6 +24,12 @@ export function Posts() {
     dispatch(deletePost({ postId: postId }));
   };
 
+  if (!posts.length) {
+    return (
+      <div className="loader"></div>
+    )
+  }
+
   return (
     <div className="flex flex-col items-center mt-8">
       {posts &&

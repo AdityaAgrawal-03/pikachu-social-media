@@ -74,7 +74,7 @@ export function Post() {
           ))}
         </div>
       ) : (
-        <div> Loading... </div>
+        <div className="loader"></div>
       )}
     </div>
   );
