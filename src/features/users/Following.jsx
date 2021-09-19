@@ -18,7 +18,7 @@ export function Following() {
     dispatch(fetchFollowing({ username: username }));
   }, [dispatch, username]);
 
-  console.log(user.following);
+  
 
   return (
     <div className="flex">

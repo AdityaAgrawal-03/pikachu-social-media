@@ -61,20 +61,16 @@ function App() {
 
   return (
     <div className="bg-coolGray-200 min-h-screen">
+      {token && <Navbar />}
       <Routes>
-        <div>
-          <Navbar />
-          <Routes>
-            <PrivateRoute path="/" element={<Home />} />
-            <PrivateRoute path="/notifications" element={<Notifications />} />
-            <PrivateRoute path="/search" element={<Search />} />
-            <PrivateRoute path="/post/:postId" element={<Post />} />
-            <PrivateRoute path="/:username" element={<Profile />} />
-            <PrivateRoute path="/:username/followers" element={<Followers />} />
-            <PrivateRoute path="/:username/following" element={<Following />} />
-            <PrivateRoute path="/settings/profile" element={<EditProfile />} />
-          </Routes>
-        </div>
+        <PrivateRoute path="/" element={<Home />} />
+        <PrivateRoute path="/notifications" element={<Notifications />} />
+        <PrivateRoute path="/search" element={<Search />} />
+        <PrivateRoute path="/post/:postId" element={<Post />} />
+        <PrivateRoute path="/:username" element={<Profile />} />
+        <PrivateRoute path="/:username/followers" element={<Followers />} />
+        <PrivateRoute path="/:username/following" element={<Following />} />
+        <PrivateRoute path="/settings/profile" element={<EditProfile />} />
         <Route path="/login" element={<Login />} />
         <Route path="/signup" element={<Signup />} />
       </Routes>
