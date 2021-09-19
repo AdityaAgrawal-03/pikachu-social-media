@@ -18,6 +18,8 @@ export function Post() {
   const post = useSelector((state) => selectPostById(state, postId));
   const navigate = useNavigate();
 
+  console.log({ post })
+
   const dispatch = useDispatch();
 
   const deletePostAction = () => {
@@ -30,7 +32,7 @@ export function Post() {
       {post ? (
         <div className="mx-auto w-1/2 mt-8">
           <section className="post-card">
-            <Avatar name={user?.name} round={true} />
+            <Avatar name={post?.user?.name} round={true} />
             <div className="flex flex-col ml-4 w-full">
               <div className="flex relative">
                 <div>
