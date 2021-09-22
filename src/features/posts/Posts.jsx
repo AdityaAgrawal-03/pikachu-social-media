@@ -30,6 +30,8 @@ export function Posts() {
     )
   }
 
+  console.log({ posts })
+
   return (
     <div className="flex flex-col items-center mt-8">
       {posts &&
@@ -66,12 +68,13 @@ export function Posts() {
               </div>
 
               <p className="my-2">{post.content}</p>
-              <div>
+              <div className="flex">
                 <PostReaction postId={post._id} userId={user._id} />
-                <button>
-                  <span className="material-icons-round blue-500">
-                    chat_bubble
+                <button className="flex items-center">
+                  <span className="material-icons-round blue-500 mr-1">
+                    chat_bubble_outline
                   </span>
+                  <small> {post?.comment?.length} </small>
                 </button>
               </div>
             </div>

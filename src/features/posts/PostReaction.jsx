@@ -18,14 +18,16 @@ export function PostReaction({ postId, userId }) {
   return (
     <>
       {!isInLiked ? (
-        <button onClick={(e) => likeButtonPressedAction(e)}>
-          <span className="material-icons-round blue-500 mr-2">
+        <button onClick={(e) => likeButtonPressedAction(e)} className="flex items-center mr-2">
+          <span className="material-icons-round blue-500 mr-1">
             favorite_border
           </span>
+          <small> {post?.likes?.length} </small>
         </button>
       ) : (
-        <button onClick={(e) => likeButtonPressedAction(e)}>
-          <span className="material-icons-round blue-500 mr-2">favorite</span>
+        <button onClick={(e) => likeButtonPressedAction(e)} className="flex items-center mr-2">
+          <span className="material-icons-round blue-500 mr-1">favorite</span>
+          <small> {post?.likes?.length} </small>
         </button>
       )}
     </>

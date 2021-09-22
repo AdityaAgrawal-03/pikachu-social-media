@@ -21,10 +21,11 @@ export function PostCard({ post }) {
           </div>
 
           <p className="my-2"> {post?.content} </p>
-          <div>
+          <div className="flex">
             <PostReaction postId={post._id} userId={currentUser?._id} />
-            <button>
-              <span className="material-icons-round blue-500">chat_bubble</span>
+            <button className="flex items-center">
+              <span className="material-icons-round blue-500 mr-1">chat_bubble_outline</span>
+              <small> {post?.comment?.length} </small>
             </button>
           </div>
         </div>

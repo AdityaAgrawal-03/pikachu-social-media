@@ -15,8 +15,6 @@ export function Profile() {
   const user = useSelector((state) => selectUserByUsername(state, username));
   const posts = useSelector((state) => selectPostByUserId(state, user?._id));
 
- 
-
   const dispatch = useDispatch();
   const navigate = useNavigate();
 

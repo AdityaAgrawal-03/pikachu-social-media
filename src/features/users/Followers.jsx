@@ -27,8 +27,12 @@ export function Followers() {
           <h1 className="font-bold uppercase text-xl mb-4"> followers </h1>
           {user?.followers.map((users) => (
             <div key={users._id} className="post-card">
-              <button className="font-semibold text-left hover:underline mr-2" onClick={() => navigate(`/${users?.username}`)}>
-                {users?.name} <small className="font-light"> @{users?.username} </small>
+              <button
+                className="font-semibold text-left hover:underline mr-2"
+                onClick={() => navigate(`/${users?.username}`)}
+              >
+                {users?.name}
+                <small className="font-light"> @{users?.username} </small>
               </button>
             </div>
           ))}
