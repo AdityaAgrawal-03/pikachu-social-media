@@ -6,39 +6,30 @@ import { API_URL } from "../../utils";
 export const fetchAllUsers = createAsyncThunk(
   "users/fetchAllUsers",
   async () => {
-    try {
-      const response = await axios.get(
-        `${API_URL}/users`
-      );
-     return response.data.users;
-    } catch (error) {
-      console.error(error);
-    }
+    const response = await axios.get(`${API_URL}/users`);
+    return response.data.users;
   }
 );
 
 // user lookup
-export const getUser = createAsyncThunk("users/getUser", async ({ username }) => {
-  const response = await axios.get(`${API_URL}/users/${username}`);
+export const getUser = createAsyncThunk(
+  "users/getUser",
+  async ({ username }) => {
+    const response = await axios.get(`${API_URL}/users/${username}`);
 
-  console.log({ response })
-
-  return response.data.user
-})
+    return response.data.user;
+  }
+);
 
 // getFollowing
 export const fetchFollowing = createAsyncThunk(
   "users/fetchFollowing",
   async ({ username }) => {
-    try {
-      const {
-        data: { userId, userFollowing },
-      } = await axios.get(`${API_URL}/users/${username}/following`);
+    const {
+      data: { userId, userFollowing },
+    } = await axios.get(`${API_URL}/users/${username}/following`);
 
-      return { userId, userFollowing };
-    } catch (error) {
-      console.error(error);
-    }
+    return { userId, userFollowing };
   }
 );
 
@@ -46,15 +37,11 @@ export const fetchFollowing = createAsyncThunk(
 export const fetchFollowers = createAsyncThunk(
   "users/fetchFollowers",
   async ({ username }) => {
-    try {
-      const {
-        data: { userId, userFollowers },
-      } = await axios.get(`${API_URL}/users/${username}/followers`);
+    const {
+      data: { userId, userFollowers },
+    } = await axios.get(`${API_URL}/users/${username}/followers`);
 
-      return { userId, userFollowers };
-    } catch (error) {
-      console.error(error);
-    }
+    return { userId, userFollowers };
   }
 );
 
@@ -62,15 +49,11 @@ export const fetchFollowers = createAsyncThunk(
 export const updateFollowingAndFollowers = createAsyncThunk(
   "users/updateFollowingAndFollowers",
   async ({ username, target_userId }) => {
-    try {
-      const {
-        data: { sourceUser, targetUser },
-      } = await axios.post(`${API_URL}/users/${username}/${target_userId}`);
+    const {
+      data: { sourceUser, targetUser },
+    } = await axios.post(`${API_URL}/users/${username}/${target_userId}`);
 
-      return { sourceUser, targetUser };
-    } catch (error) {
-      console.error(error);
-    }
+    return { sourceUser, targetUser };
   }
 );
 
@@ -101,7 +84,6 @@ const usersSlice = createSlice({
     [getUser.fulfilled]: (state, action) => {
       state.status = "success";
       state.fetchedUser = action.payload;
-
     },
     [getUser.rejected]: (state, action) => {
       state.status = "failed";
@@ -149,7 +131,7 @@ const usersSlice = createSlice({
         (user) => user._id === action.payload.targetUser._id
       );
 
-      console.log({ sourceUser })
+      console.log({ sourceUser });
 
       const isInTargetUserFollowers = targetUser.followers.includes(
         sourceUser._id
