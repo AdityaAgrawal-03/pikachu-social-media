@@ -65,8 +65,10 @@ export function AddPost({ setShow, show }) {
           </label>
           <button
             type="button"
-            className="text-white py-2 px-6 bg-blue-500 rounded-lg"
+            disabled={newPost ? false : true}
+            className={newPost ? "text-white py-2 px-6 bg-blue-500 rounded-lg" : "text-white py-2 px-6 bg-blue-500 rounded-lg opacity-50 cursor-default"}
             onClick={addPostAction}
+            
           >
             Add Post
           </button>

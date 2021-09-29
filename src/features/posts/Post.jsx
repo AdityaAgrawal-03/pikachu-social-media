@@ -30,7 +30,7 @@ export function Post() {
   return (
     <div className="min-h-screen flex">
       {post ? (
-        <div className="mx-auto w-1/2 mt-8">
+        <div className="mx-auto lg:w-1/2 w-5/12 mt-8">
           <section className="post-card">
             <Avatar name={post?.user?.name} round={true} />
             <div className="flex flex-col ml-4 w-full">
