@@ -37,7 +37,7 @@ function App() {
 
   useEffect(() => {
     setUpAuthExceptionHandler(dispatch);
-  }, [dispatch]);
+  }, [dispatch, token]);
 
   useEffect(() => {
     if (token) {

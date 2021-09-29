@@ -1,5 +1,5 @@
 import { useSelector, useDispatch } from "react-redux";
-import { Link, NavLink } from "react-router-dom";
+import { NavLink } from "react-router-dom";
 import { selectCurrentUser, selectToken, AddPost } from "../features/index";
 import { logout } from "../features/authentication/authenticationSlice";
 import { useState } from "react";

@@ -7,6 +7,7 @@ import {
   updateFollowingAndFollowers,
   selectPostByUserId,
   PostCard,
+  
 } from "../index";
 
 export function Profile() {
@@ -59,7 +60,10 @@ export function Profile() {
               </div>
             </div>
             {username === currentUser?.username ? (
-              <button className="text-black py-2 px-6 bg-coolGray-50 border-coolGray-400 border-2 rounded-lg h-10 hover:bg-coolGray-300" onClick={() => navigate("/settings/profile")}>
+              <button
+                className="text-black py-2 px-6 bg-coolGray-50 border-coolGray-400 border-2 rounded-lg h-10 hover:bg-coolGray-300"
+                onClick={() => navigate("/settings/profile")}
+              >
                 Edit profile
               </button>
             ) : (
@@ -75,12 +79,13 @@ export function Profile() {
               </button>
             )}
           </div>
+
           {posts.map((post) => (
             <PostCard key={post._id} post={post} />
           ))}
         </>
       ) : (
-        <div> Loading... </div>
+        <div className="loader"> </div>
       )}
     </div>
   );
