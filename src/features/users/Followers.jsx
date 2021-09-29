@@ -27,8 +27,6 @@ export function Followers() {
     dispatch(fetchFollowers({ username: username }));
   }, [dispatch, username]);
 
-  console.log({ userStatus, user });
-
   return (
     <div className="flex">
       {userStatus === "success" ? (

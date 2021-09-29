@@ -15,16 +15,16 @@ module.exports = {
       keyframes: {
         transcend: {
           "-50%": {
-            opacity: "0"
+            opacity: "0",
           },
-          "0": {
-            opacity: "1"
-          }
-        }
+          0: {
+            opacity: "1",
+          },
+        },
       },
       animation: {
-        transcend: "transcend 1s ease-in-out 0.8s"
-      }
+        transcend: "transcend 1s ease-in-out 0.8s",
+      },
     },
   },
   variants: {

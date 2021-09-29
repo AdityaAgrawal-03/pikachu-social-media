@@ -44,9 +44,9 @@ export function UsersSuggestion() {
         <div key={user?._id} className="w-full m-px">
           <Link to={`/${user?.username}`}>
             <div className="bg-coolGray-200 p-2 rounded-md hover:bg-coolGray-300">
-              <p className="text-center">
+              <p className="text-center font-bold">
                 {user?.name}
-                <small className="ml-2">@{user?.username}</small>
+                <small className="ml-2 font-light">@{user?.username}</small>
               </p>
             </div>
           </Link>
