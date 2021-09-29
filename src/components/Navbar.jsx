@@ -1,5 +1,5 @@
 import { useSelector, useDispatch } from "react-redux";
-import { Link } from "react-router-dom";
+import { Link, NavLink } from "react-router-dom";
 import { selectCurrentUser, selectToken, AddPost } from "../features/index";
 import { logout } from "../features/authentication/authenticationSlice";
 import { useState } from "react";
@@ -16,26 +16,26 @@ export function Navbar() {
       {show && <AddPost setShow={setShow} show={show} />}
 
       <div className="flex flex-col items-center justify-around text-xl bg-coolGray-50 fixed rounded-xl w-1/6 h-4/5 mt-8 ml-28">
-        <Link to="/">
+        <NavLink to="/" activeClassName="activeStyle" end>
           <p> Home </p>
-        </Link>
-        <Link to="/search">
+        </NavLink>
+        <NavLink to="/search" activeClassName="activeStyle">
           <p> Search </p>
-        </Link>
+        </NavLink>
 
-        <Link to="/notifications">
+        <NavLink to="/notifications" activeClassName="activeStyle">
           <p> Notifications </p>
-        </Link>
-        <Link to={`/${currentUser?.username}`}>
+        </NavLink>
+        <NavLink to={`/${currentUser?.username}`} activeClassName="activeStyle">
           <p> Profile </p>
-        </Link>
+        </NavLink>
 
         {token && <button onClick={() => dispatch(logout())}> Signout </button>}
         <button
           className="text-white py-2 px-10 bg-blue-500 rounded-lg"
           onClick={() => setShow(!show)}
         >
-          Post
+          Add Post
         </button>
       </div>
     </>

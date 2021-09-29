@@ -7,8 +7,9 @@ export const setUpAuthExceptionHandler = (dispatch) => {
   axios.interceptors.response.use(
     (response) => response,
     (error) => {
-      console.log(error?.response?.status)
+      console.log(error?.response?.status, "here")
       if (error?.response?.status === UNAUTHORIZED || error?.response?.status === FORBIDDEN) {
+        console.log("here")
         dispatch(logout());
       }
       return Promise.reject(error);

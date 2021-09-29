@@ -16,7 +16,9 @@
     @apply animate-spin rounded-full border-blue-500 mx-auto mt-8 w-32 h-32 border-b-4 border-t-4
   }
 
-  
+  .activeStyle {
+    @apply font-bold
+  }
 }
 
 
