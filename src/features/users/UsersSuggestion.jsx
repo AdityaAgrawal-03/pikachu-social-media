@@ -7,8 +7,9 @@ import {
   selectFetchedUser,
   getUser,
   selectToken,
+  updateFollowingAndFollowers,
 } from "../index";
-import { setUpAuthHeaderForServiceCalls } from "../../utils/setUpAuthHeaderForServiceCalls"
+import { setUpAuthHeaderForServiceCalls } from "../../utils/setUpAuthHeaderForServiceCalls";
 
 export function UsersSuggestion() {
   const users = useSelector(selectAllUsers);
@@ -31,11 +32,20 @@ export function UsersSuggestion() {
 
   useEffect(() => {
     dispatch(getUser({ username: currentUser?.username }));
-  }, [dispatch, currentUser?.username]);
+  }, [dispatch, currentUser?.username, followingList]);
 
   const filteredUsers = users
     ?.filter((user) => user?._id !== fetchedUser?._id)
     ?.filter((user) => (followingList?.includes(user?._id) ? null : user));
+  
+    const updateFollowingAndFollowersAction = (targetUserId) => {
+    dispatch(
+      updateFollowingAndFollowers({
+        username: currentUser?.username,
+        target_userId: targetUserId,
+      })
+    );
+  };
 
   return (
     <div className="bg-coolGray-50 rounded-xl w-11/12 h-4/5 mr-4 flex flex-col items-center p-4">
@@ -43,11 +53,20 @@ export function UsersSuggestion() {
       {filteredUsers.map((user) => (
         <div key={user?._id} className="w-full m-px">
           <Link to={`/${user?.username}`}>
-            <div className="bg-coolGray-200 p-2 rounded-md hover:bg-coolGray-300">
-              <p className="text-center font-bold">
+            <div className="flex justify-between bg-coolGray-200 p-2 rounded-md hover:bg-coolGray-300 p-4">
+              <p className="text-left font-bold">
                 {user?.name}
                 <small className="ml-2 font-light">@{user?.username}</small>
               </p>
+              <button
+                className="bg-blue-500 text-white rounded-lg p-2 text-sm"
+                onClick={(e) => {
+                  e.preventDefault()
+                  updateFollowingAndFollowersAction(user?._id);
+                }}
+              >
+                Follow
+              </button>
             </div>
           </Link>
         </div>
