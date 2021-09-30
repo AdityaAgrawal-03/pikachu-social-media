@@ -65,7 +65,12 @@ const usersSlice = createSlice({
     status: "idle",
     error: null,
   },
-  reducers: {},
+  reducers: {
+    changeUserStatus: (state) => {
+      state.status = "idle";
+      state.users = [];
+    }
+  },
   extraReducers: {
     [fetchAllUsers.pending]: (state, action) => {
       state.status = "pending";
@@ -165,6 +170,8 @@ const usersSlice = createSlice({
     },
   },
 });
+
+export const { changeUserStatus } = usersSlice.actions
 
 export default usersSlice.reducer;
 

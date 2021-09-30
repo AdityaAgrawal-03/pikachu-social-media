@@ -7,13 +7,13 @@ import {
   updateFollowingAndFollowers,
   selectPostByUserId,
   PostCard,
-  
 } from "../index";
 
 export function Profile() {
   const { username } = useParams();
   const currentUser = useSelector(selectCurrentUser);
   const user = useSelector((state) => selectUserByUsername(state, username));
+
   const posts = useSelector((state) => selectPostByUserId(state, user?._id));
 
   const dispatch = useDispatch();

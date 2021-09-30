@@ -25,19 +25,15 @@ export function Posts() {
   };
 
   if (!posts.length) {
-    return (
-      <div className="loader"></div>
-    )
+    return <div className="loader"></div>;
   }
-
-  console.log({ posts })
 
   return (
     <div className="flex flex-col items-center mt-8">
       {posts &&
         orderedPosts.map((post) => (
           <Link to={`/post/${post?._id}`} className="post-card" key={post?._id}>
-            <Avatar name={post?.user?.name} round={true}  />
+            <Avatar name={post?.user?.name} round={true} />
             <div className="flex flex-col ml-4 w-full">
               <div className="flex relative">
                 <div>
@@ -49,7 +45,9 @@ export function Posts() {
                     }}
                   >
                     {post.user.name}
-                    <small className="font-light ml-2">@{post.user.username}</small>
+                    <small className="font-light ml-2">
+                      @{post.user.username}
+                    </small>
                   </button>
                   <TimeAgo timestamp={post?.createdAt} />
                 </div>

@@ -1,7 +1,13 @@
 import { useSelector, useDispatch } from "react-redux";
 import { NavLink } from "react-router-dom";
-import { selectCurrentUser, selectToken, AddPost } from "../features/index";
-import { logout } from "../features/authentication/authenticationSlice";
+import {
+  selectCurrentUser,
+  selectToken,
+  AddPost,
+  logout,
+  changeUserStatus,
+} from "../features/index";
+
 import { useState } from "react";
 import "../index.css";
 
@@ -30,7 +36,16 @@ export function Navbar() {
           <p> Profile </p>
         </NavLink>
 
-        {token && <button onClick={() => dispatch(logout())}> Signout </button>}
+        {token && (
+          <button
+            onClick={() => {
+              dispatch(logout());
+              dispatch(changeUserStatus());
+            }}
+          >
+            Signout
+          </button>
+        )}
         <button
           className="text-white py-2 px-10 bg-blue-500 rounded-lg"
           onClick={() => setShow(!show)}
