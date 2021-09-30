@@ -1,21 +1,12 @@
-import { useSelector, useDispatch } from "react-redux";
+import { useSelector } from "react-redux";
 import { NavLink } from "react-router-dom";
-import {
-  selectCurrentUser,
-  selectToken,
-  AddPost,
-  logout,
-  changeUserStatus,
-} from "../features/index";
-
+import { selectCurrentUser, AddPost } from "../features/index";
 import { useState } from "react";
 import "../index.css";
 
 export function Navbar() {
-  const token = useSelector(selectToken);
   const currentUser = useSelector(selectCurrentUser);
   const [show, setShow] = useState(false);
-  const dispatch = useDispatch();
 
   return (
     <>
@@ -36,16 +27,6 @@ export function Navbar() {
           <p> Profile </p>
         </NavLink>
 
-        {token && (
-          <button
-            onClick={() => {
-              dispatch(logout());
-              dispatch(changeUserStatus());
-            }}
-          >
-            Signout
-          </button>
-        )}
         <button
           className="text-white py-2 px-10 bg-blue-500 rounded-lg"
           onClick={() => setShow(!show)}

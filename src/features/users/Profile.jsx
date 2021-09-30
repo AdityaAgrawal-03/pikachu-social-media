@@ -7,6 +7,8 @@ import {
   updateFollowingAndFollowers,
   selectPostByUserId,
   PostCard,
+  logout,
+  changeUserStatus
 } from "../index";
 
 export function Profile() {
@@ -61,10 +63,13 @@ export function Profile() {
             </div>
             {username === currentUser?.username ? (
               <button
-                className="text-black py-2 px-6 bg-coolGray-50 border-coolGray-400 border-2 rounded-lg h-10 hover:bg-coolGray-300"
-                onClick={() => navigate("/settings/profile")}
+                className="text-white py-2 px-6 bg-red-500 rounded-lg h-10"
+                onClick={() => {
+                  dispatch(logout());
+                  dispatch(changeUserStatus());
+                }}
               >
-                Edit profile
+                Signout
               </button>
             ) : (
               <button
