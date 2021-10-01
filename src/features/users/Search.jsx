@@ -50,7 +50,7 @@ export function Search() {
         })
         .map((user) => (
           <Link to={`/${user?.username}`} key={user._id}>
-            <p className="text-xl uppercase"> {user?.name} </p>
+            <p className="text-xl uppercase hover:font-bold"> {user?.name} </p>
           </Link>
         ))}
     </div>
