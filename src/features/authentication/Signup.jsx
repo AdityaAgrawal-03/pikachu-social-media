@@ -38,14 +38,14 @@ export function Signup() {
 
   return (
     <div className="flex flex-col items-center">
-      <h1 className="text-3xl my-8"> Welcome to pikachu </h1>
+      <h1 className="text-3xl my-8 font-bold"> Welcome to pikachu </h1>
       <div className="flex flex-col rounded-xl bg-coolGray-50 p-4 w-1/2">
         <h2 className="text-2xl text-center uppercase mb-2"> Signup </h2>
         {status === "failed" && <p> user already exists! </p>}
         <form className="flex flex-col items-center mt-4 text-xl">
           <div className="flex w-2/3 justify-between">
             {" "}
-            <label htmlFor="name">Name</label>
+            <label htmlFor="name" className="font-bold">Name</label>
             <input
               id="name"
               type="text"
@@ -59,7 +59,7 @@ export function Signup() {
 
           <div className="flex w-2/3 justify-between">
             {" "}
-            <label htmlFor="username">Username</label>
+            <label htmlFor="username" className="font-bold">Username</label>
             <input
               id="username"
               type="text"
@@ -76,7 +76,7 @@ export function Signup() {
           </div>
 
           <div className="flex w-2/3 justify-between">
-            <label htmlFor="email">Email</label>
+            <label htmlFor="email" className="font-bold">Email</label>
             <input
               id="email"
               type="email"
@@ -89,7 +89,7 @@ export function Signup() {
           </div>
 
           <div className="flex w-2/3 justify-between">
-            <label htmlFor="password">Password</label>
+            <label htmlFor="password" className="font-bold">Password</label>
             <input
               id="password"
               type="password"

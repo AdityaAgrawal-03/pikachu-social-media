@@ -27,11 +27,11 @@ export function Login() {
 
   return (
     <div className="flex flex-col items-center">
-      <h1 className="text-3xl my-8"> Welcome to pikachu </h1>
+      <h1 className="text-3xl my-8 font-bold"> Welcome to pikachu </h1>
       <div className="flex flex-col rounded-xl bg-coolGray-50 p-4 w-1/2">
         <h2 className="text-2xl text-center uppercase"> Login </h2>
         <button
-          className="text-blue-500 font-bold"
+          className="text-blue-500 font-bold text-lg mb-4"
           onClick={() => {
             setEmail("test@gmail.com");
             setPassword("test");
@@ -40,8 +40,10 @@ export function Login() {
           Use guest credentials
         </button>
         <form className="flex flex-col items-center mt-4 text-xl">
-          <label>
+        <div className="flex w-2/3 justify-between"> 
+        <label className="font-bold">
             Email
+            </label>
             <input
               className={
                 status === "failed"
@@ -56,9 +58,12 @@ export function Login() {
               required={true}
               onChange={(e) => setEmail(() => e.target.value)}
             />
-          </label>
-          <label>
-            Password
+          
+         </div>
+
+         <div className="flex w-2/3 justify-between"> 
+         <label className="font-bold">
+            Password  </label>
             <input
               className={
                 status === "failed"
@@ -73,10 +78,14 @@ export function Login() {
               value={password}
               onChange={(e) => setPassword(() => e.target.value)}
             />
-          </label>
+         
+         
+          </div>
+         
+          
           <button
             type="button"
-            className="text-white py-2 px-6 bg-blue-500 rounded-lg uppercase"
+            className="text-white py-2 px-6 bg-blue-500 rounded-lg uppercase mt-4"
             onClick={login}
           >
             {status === "signing in" ? (
