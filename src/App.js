@@ -32,6 +32,10 @@ function App() {
   const postStatus = useSelector(selectPostStatus);
   const userStatus = useSelector(selectUserStatus);
 
+  token && setUpAuthHeaderForServiceCalls(token)
+
+  console.log({ token })
+
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
@@ -39,13 +43,13 @@ function App() {
     setUpAuthExceptionHandler(dispatch);
   }, [dispatch, token]);
 
-  useEffect(() => {
-    if (token) {
-      setUpAuthHeaderForServiceCalls(token);
-    } else {
-      navigate("/login", { replace: true });
-    }
-  }, [token, navigate]);
+  // useEffect(() => {
+  //   if (token) {
+  //     setUpAuthHeaderForServiceCalls(token);
+  //   } else {
+  //     navigate("/login", { replace: true });
+  //   }
+  // }, [token, navigate]);
 
   useEffect(() => {
     if (token && postStatus === "idle") {

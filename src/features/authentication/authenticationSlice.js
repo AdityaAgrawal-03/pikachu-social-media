@@ -33,19 +33,26 @@ export const signupUser = createAsyncThunk(
 const authSlice = createSlice({
   name: "auth",
   initialState: {
-    token: JSON.parse(localStorage?.getItem("token"))?.token,
-    currentUser: JSON.parse(localStorage?.getItem("user"))?.user,
+    token: JSON.parse(localStorage?.getItem("token"))?.token || null,
+    currentUser: JSON.parse(localStorage?.getItem("user"))?.user || null,
     status: "idle",
     error: null,
   },
   reducers: {
-    logout: (state, action) => {
+    logout: () => {
       localStorage?.removeItem("token");
       localStorage?.removeItem("user");
-      state.token = null;
-      state.currentUser = null;
-      state.status = "idle";
-      state.error = null;
+
+      return {
+        token: null,
+        currentUser: null,
+        status: "idle",
+        error: null
+      }
+      // state.token = null;
+      // state.currentUser = null;
+      // state.status = "idle";
+      // state.error = null;
     },
   },
   extraReducers: {
