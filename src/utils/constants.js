@@ -1,0 +1,1 @@
+export const API_URL = "https://pikachu-social-media.aditya365.repl.co";

@@ -1,0 +1,15 @@
+@import url("https://fonts.googleapis.com/css2?family=Montserrat&display=swap");
+
+body {
+  font-family: "Montserrat", sans-serif;
+}
+
+.material-icons-round.blue-500 {
+  color: #3b82f6;
+}
+.material-icons-round.bg-red-500 {
+  background-color: #ef4444;
+}
+.material-icons-round.coolGray-400 {
+  color: #9ca3af;
+}
